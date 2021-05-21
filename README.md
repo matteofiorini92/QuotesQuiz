@@ -1,59 +1,179 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# QuotesQuiz
 
-Welcome USER_NAME,
+![home page all screen sizes](xxx)
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use.
+[Link to deployed website](xxx)
 
-## Gitpod Reminders
+QuotesQuiz is an online game. The player is presented with a quote and needs to guess who said it, choosing between multiple options.
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+# Table Of Contents
 
-`python3 -m http.server`
+-   [User Experience](#user-experience)
+-   [Features](#features)
+-   [Technologies Used](#technologies-used)
+-   [Testing](#testing)
+-   [Deployment](#deployment)
+-   [Credits](#credits)
 
-A blue button should appear to click: _Make Public_,
+## User Experience
 
-Another blue button should appear to click: _Open Browser_.
+-   [User Stories](#user-stories)
+-   [The Scope Plane](#the-Scope-plane)
+-   [The Structure Plane](#the-structure-plane)
+-   [Wireframes](#wireframes)
+-   [The Surface Plane](#the-surface-plane)
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
 
-A blue button should appear to click: _Make Public_,
+### User Stories
 
-Another blue button should appear to click: _Open Browser_.
+The goal of this game is guess who said a specific quote. Quotes will be divided into categories.
+At the beginning of the game, the player will chose the category, game difficulty and number of quotes.
+For each right answer, the player will gain points, while when the answer is wrong, they will lose points.
 
-In Gitpod you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+- User story 1: I want to prove myself how well I know a specific subject (movies, books, etc.).
+- User story 2: I want to challenge my friends on who know a particular topic the best
 
-To log into the Heroku toolbelt CLI:
+### The Scope Plane
 
-1. Log in to your Heroku account and go to *Account Settings* in the menu under your avatar.
-2. Scroll down to the *API Key* and click *Reveal*
-3. Copy the key
-4. In Gitpod, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
+Users want to have fun playing a game that will challenge their knowledge on a subject of which they consider themselves experts.
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidently make it public then you can create a new one with _Regenerate API Key_.
 
-## Updates Since The Instructional Video
+### The Structure Plane
 
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
+The website will have only one page. The content of the page will change base on the user's choices.
+The first version of the page will have 4 questions:
+- Name of the player
+- Topic
+- Number of questions
+- Difficulty (this will impact the amount of options given to the user)
 
-**May 10 2021:** Added `heroku_config` script to allow Heroku API key to be stored as an environment variable.
+Once the user has filled in all these fields the game starts:
+- The previous fields will disappear from the page
+- On the page there will be one quote, 3/5 options based on the difficulty chosen, a progression bar and the current score.
+- At the end, the page will have a congratulation message with the name of the user and the score.
 
-**April 7 2021:** Upgraded the template for VS Code instead of Theia.
 
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
+### Wireframes
 
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
+- [Welcome Page Wireframe](xxx)
+- [QuotePage Wireframe](xxx)
+- [Congratulation Page Wireframe](xxx)
 
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
+### The Surface Plane
 
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
+The color palette of the website will change based on the topic chosen?
+Fonts will be:
+- xxx
+- xxx
 
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
+## Features
 
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
+-   [Existing Features](#existing-features)
+-   [Features Left to Implement](#features-left-to-implement)
+ 
+### Existing Features
 
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
+- Feature 1 - xxx
 
----
 
-Happy coding!
+### Features Left to Implement
+- xxx
+
+## Technologies Used
+
+- [Balsamiq](https://balsamiq.com/) for the wireframes of this readme.md file
+- [Bootstrap](https://getbootstrap.com/) to use the grid system, pre-formatted buttons in xxx
+- [Animate.css](https://animate.style/) for xxx
+- [FontAwesome](https://fontawesome.com/) for icons
+- [Google Fonts](https://fonts.google.com/) for fonts
+- [Hover.css](http://ianlunn.github.io/Hover/) for xxx
+- [JavaScript](https://code.jquery.com/)
+...APIs...
+
+## Testing
+
+Usability and responsiveness were tested on the followin browsers:
+xxx
+
+All sections and divs adapted to the screen size as expected, all links worked fine and the navigation was flawless.
+
+
+[prove user stories were successfully satisfied]
+User story 1: 
+xxx
+
+
+The Google Chrome Lighthouse feature was used on xxx
+Results can be seen here:
+- [Home Page](xxx)
+
+
+I used the following validators to check my HTML and CSS code:
+
+[HTML Validator](https://validator.w3.org/)
+- [Home Page](xxx)
+
+[CSS Validator](https://jigsaw.w3.org/css-validator/)
+
+[style.css file](xxx)
+<p>
+    <a href="https://jigsaw.w3.org/css-validator/check/referer">
+        <img style="border:0;width:88px;height:31px"
+            src="https://jigsaw.w3.org/css-validator/images/vcss"
+            alt="Valid CSS!" />
+    </a>
+</p>
+      
+
+### Bugs
+
+
+## Deployment
+
+[Link to deployed website](xxx)
+
+This project was developed using GitPod, pushed to GitHub and deployed using GitHub Pages.
+
+To deploy to GitHub Pages from its GitHub repository, the following steps were taken:
+
+1. Log into GitHub
+2. From the list of repositories on the screen, select **matteofiorini92/xxx**
+3. From the menu items near the top of the page, select **Settings**
+4. Scroll down to the **GitHub Pages** section
+5. Under **Source** click the drop-down menu labelled **None** and select **main**
+6. In the **folder** drop-down, the **/root** folder is automatically selected
+7. Click on **Save**
+8. The project is now deployed and the URL of the website is available in the GitHub Pages section
+
+### Hot to run this project locally
+
+To clone this project into Gitpod you will need:
+
+1. A Github account
+2. Use the Chrome browser
+
+Then follow these steps:
+
+1. Install the Gitpod Browser Extension for Chrome
+2. After installation, restart the browser
+3. Log into Gitpod with your gitpod account
+4. Navigate to the Project GitHub repository
+5. Click the green GitPod button in the top right corner of the repository
+6. This will trigger a new gitpod workspace to be created
+
+To work on the project code within a local IDE such as VSCode, Pycharm etc:
+
+1. Follow this link to the [GitHub repository](https://github.com/matteofiorini92/Flowers-Spa)
+2. Click on the Code button
+3. In the drop-down, copy the URL that you see in the HTTPs tab
+4. In your local IDE, open the terminal
+5. Change the current working directory to the location where you want the cloned directory to be made
+6. Type git clone and paste the URL you copied in Step 3
+7. Press Enter. Your local clone will be created.
+
+## Credits
+
+
+### Acknowledgements
+
+The content of the deployment section of this readme.md was mostly taken from [this webinar](https://www.youtube.com/watch?v=7BteidgLAyM).
