@@ -89,6 +89,7 @@ Fonts will be:
 - [Hover.css](http://ianlunn.github.io/Hover/) for xxx
 - [JavaScript](https://code.jquery.com/)
 ...APIs...
+- [FreeLogoDesign](https://www.freelogodesign.org/) to design the logo
 
 ## Testing
 

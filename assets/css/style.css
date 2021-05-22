@@ -19,3 +19,7 @@ h1 {
 .wrong-answer {
     background-color: red;
 }
+
+header {
+    text-align: center;
+}

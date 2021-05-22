@@ -2,6 +2,10 @@ let allQuotes;
 let allAuthors;
 var rightAuthorName;
 var playerName;
+let topic;
+let difficulty;
+let numberOfQuotes;
+
 
 $('document').ready(function () {
 
@@ -17,57 +21,71 @@ $('document').ready(function () {
         function () {
 
             playerName = document.getElementById('player-name').value;
-            console.log(playerName);
-            let numberOfQuotes = document.getElementById('quotes').value;
+            numberOfQuotes = document.getElementById('quotes').value;
+            topic = document.getElementById('topic').value;
+            difficulty = document.getElementById('difficulty');
             if (!playerName) {
                 alert("Come on, you must have a name!");
             } else {
-
-                // get all quotes
-
-                let quotesRequest = new XMLHttpRequest();
-                quotesRequest.open('GET', 'https://the-one-api.dev/v2/quote/');
-                quotesRequest.setRequestHeader('Authorization', 'Bearer TLVn4EUDXxn5E9lePgAT');
-                quotesRequest.onload = function () {
-                    if (quotesRequest.readyState === 4 && quotesRequest.status === 200) {
-                        allQuotes = $.parseJSON(quotesRequest.responseText);
-
-                        // get all characters
-
-                        let charactersRequest = new XMLHttpRequest();
-                        charactersRequest.open('GET', 'https://the-one-api.dev/v2/character/');
-                        charactersRequest.setRequestHeader('Authorization', 'Bearer TLVn4EUDXxn5E9lePgAT');
-
-                        charactersRequest.onload = function () {
-                            if (charactersRequest.readyState === 4 && charactersRequest.status === 200) {
-                                allAuthors = $.parseJSON(charactersRequest.responseText);
-
-                                // once all quotes and all characters are loaded, start game
-                                $('.player').addClass('hidden');
-                                $('.characters').removeClass('hidden');
-                                $('.score-area').removeClass('hidden');
-                                $('.progression-area').removeClass('hidden');
-                                document.getElementById('number-of-quotes').innerText = numberOfQuotes;
-                                console.log(playerName);
-                                playGame(allQuotes, allAuthors, playerName);
-                            }
-                        }
-                        charactersRequest.onerror = function (e) {
-                            console.error(charactersRequest.statusText)
-                        }
-                        charactersRequest.send();
-                    }
-                }
-                quotesRequest.onerror = function (e) {
-                    console.error(quotesRequest.statusText)
-                }
-                quotesRequest.send();
-
+                switch(topic) {
+                    case 'lotr':
+                        lotr();
+                        break;
+                    case y:
+                        break;
+                    default:
+                        console.log('invalid category');
+                  }
             }
         }
     );
 
 });
+
+
+function lotr() {
+    // get all quotes
+
+    let quotesRequest = new XMLHttpRequest();
+    quotesRequest.open('GET', 'https://the-one-api.dev/v2/quote/');
+    quotesRequest.setRequestHeader('Authorization', 'Bearer TLVn4EUDXxn5E9lePgAT');
+    quotesRequest.onload = function () {
+        if (quotesRequest.status === 200) {
+            allQuotes = $.parseJSON(quotesRequest.responseText);
+
+            // get all characters
+
+            let charactersRequest = new XMLHttpRequest();
+            charactersRequest.open('GET', 'https://the-one-api.dev/v2/character/');
+            charactersRequest.setRequestHeader('Authorization', 'Bearer TLVn4EUDXxn5E9lePgAT');
+
+            charactersRequest.onload = function () {
+                if (charactersRequest.status === 200) {
+                    allAuthors = $.parseJSON(charactersRequest.responseText);
+                    console.log(allQuotes);
+                    console.log(allAuthors);
+                    // once all quotes and all characters are loaded, start game
+                    $('.player').addClass('hidden');
+                    $('.characters').removeClass('hidden');
+                    $('.score-area').removeClass('hidden');
+                    $('.progression-area').removeClass('hidden');
+                    document.getElementById('number-of-quotes').innerText = numberOfQuotes;
+                    playGame(allQuotes, allAuthors, playerName);
+                }
+            }
+            charactersRequest.onerror = function (e) {
+                console.error(charactersRequest.statusText)
+            }
+            charactersRequest.send();
+        }
+    }
+    quotesRequest.onerror = function (e) {
+        console.error(quotesRequest.statusText)
+    }
+    quotesRequest.send();
+}
+
+
 
 function playGame(allQuotes, allAuthors, playerName) {
     console.log(playerName, " playgame");
@@ -81,7 +99,7 @@ function playGame(allQuotes, allAuthors, playerName) {
         $('.characters').addClass('hidden');
         $('.score-area').addClass('hidden');
         $('.progression-area').addClass('hidden');
-        
+
         scoreboard(playerName, finalScore);
         // $('.scoreboard').removeClass('hidden');
         // $('.scoreboard').html(`<p>Congratulations! Your final score is ${finalScore} </p>`);
@@ -97,10 +115,10 @@ function getQuote(allQuotes, allAuthors) {
 
     $('.quote').html(quoteText);
     let rightCharacterId = allQuotes.docs[quoteId].character;
-    getCharacters(allQuotes, allAuthors, rightCharacterId);
+    getCharacters(allAuthors, rightCharacterId);
 }
 
-function getCharacters(allQuotes, allAuthors, rightCharacterId) {
+function getCharacters(allAuthors, rightCharacterId) {
 
     //get names and ids of two fake characters
 
@@ -135,36 +153,6 @@ function getCharacters(allQuotes, allAuthors, rightCharacterId) {
     document.getElementById('char-2').innerText = threeNames[1];
     document.getElementById('char-3').innerText = threeNames[2];
 
-}
-
-//https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
-
-function shuffle(array) {
-
-    var currentIndex = array.length,
-        temporaryValue, randomIndex;
-
-    // While there remain elements to shuffle...
-    while (0 !== currentIndex) {
-
-        // Pick a remaining element...
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-
-        // And swap it with the current element.
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-    }
-
-    return array;
-}
-
-function updateScore(points) {
-
-    let currentScore = parseInt(document.getElementById('score').innerText);
-    currentScore += points;
-    document.getElementById('score').innerText = currentScore;
 }
 
 function updateProgression(allQuotes, allAuthors) {
@@ -202,7 +190,7 @@ $('.char-btn').click(function () {
         $('#char-2').removeClass('right-answer').removeClass('wrong-answer');
         $('#char-3').removeClass('right-answer').removeClass('wrong-answer');
         updateProgression(allQuotes, allAuthors);
-    }, 1500);
+    }, 500);
 
 
 });
@@ -215,6 +203,54 @@ function findRightAnswer(rightAuthorName, characters) {
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// common functions for all topics
+
+//https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
+
+function shuffle(array) {
+
+    var currentIndex = array.length,
+        temporaryValue, randomIndex;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+
+        // And swap it with the current element.
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+}
+
+function updateScore(points) {
+
+    let currentScore = parseInt(document.getElementById('score').innerText);
+    currentScore += points;
+    document.getElementById('score').innerText = currentScore;
+}
+
 
 function scoreboard(playerName, finalScore) {
     console.log(playerName);
@@ -242,7 +278,7 @@ function scoreboard(playerName, finalScore) {
 
     players.sort(compare);
     let scoreboardHTML = "";
-    for (let i = 0; i<players.length; i++) {
+    for (let i = 0; i < players.length; i++) {
         scoreboardHTML += `<p>${i+1} - ${players[i].score} ${players[i].name}</p>`;
     }
     $('.scoreboard').html(scoreboardHTML);
