@@ -1,17 +1,22 @@
-let allQuotes;
-let allAuthors;
-var rightAuthorName;
+let allQuotes = "";
+let allAuthors = "";
+var rightAuthorName = "";
 var playerName;
-let topic;
-let difficulty;
-let numberOfQuotes;
-let quoteText;
+let topic = "";
+let difficulty = "";
+let numberOfQuotes = "";
+let quoteText = "";
 
 
-$('document').ready(function () {
+$('document').ready(beginning);
 
+function beginning() {
+
+
+    $('.player').removeClass('hidden');
+    $('.scoreboard').addClass('hidden');
+    $('#start-over').addClass('hidden');
     //populate n. of quotes to guess
-
     let options = "";
     for (let i = 1; i <= 20; i++) {
         options += `<option value="${i}">${i}</option>`;
@@ -24,7 +29,7 @@ $('document').ready(function () {
             playerName = document.getElementById('player-name').value;
             numberOfQuotes = document.getElementById('quotes').value;
             topic = document.getElementById('topic').value;
-            difficulty = document.getElementById('difficulty');
+            difficulty = document.getElementById('difficulty').checked;
             if (!playerName) {
                 alert("Come on, you must have a name!");
             } else {
@@ -42,9 +47,7 @@ $('document').ready(function () {
         }
     );
 
-});
-
-
+}
 
 
 function playGame() {
@@ -118,6 +121,22 @@ function getCharacters(rightAuthor) {
                 var fakeCharacterName2 = allAuthors.docs[rnd].name;
             } while (fakeCharacterId2 === rightAuthor);
 
+            // difficulty = hard >> two more characters
+            if (!difficulty) {
+                do {
+                    let rnd = Math.floor(Math.random() * allAuthors.docs.length);
+                    var fakeCharacterId3 = allAuthors.docs[rnd]._id;
+                    var fakeCharacterName3 = allAuthors.docs[rnd].name;
+                } while (fakeCharacterId3 === rightAuthor);
+
+                do {
+                    let rnd = Math.floor(Math.random() * allAuthors.docs.length);
+                    var fakeCharacterId4 = allAuthors.docs[rnd]._id;
+                    var fakeCharacterName4 = allAuthors.docs[rnd].name;
+                } while (fakeCharacterId4 === rightAuthor);
+
+            }
+
             // find name of right character
 
             for (let i = 0; i < allAuthors.docs.length; i++) {
@@ -137,6 +156,18 @@ function getCharacters(rightAuthor) {
                 let rnd = Math.floor(Math.random() * allAuthors.length);
                 var fakeCharacterName2 = allAuthors[rnd];
             } while (fakeCharacterName2 === rightAuthor);
+
+
+            if (!difficulty) {
+                do {
+                    let rnd = Math.floor(Math.random() * allAuthors.length);
+                    var fakeCharacterName3 = allAuthors[rnd];
+                } while (fakeCharacterName3 === rightAuthor);
+                do {
+                    let rnd = Math.floor(Math.random() * allAuthors.length);
+                    var fakeCharacterName4 = allAuthors[rnd];
+                } while (fakeCharacterName4 === rightAuthor);
+            }
             rightAuthorName = rightAuthor;
             break;
 
@@ -145,17 +176,31 @@ function getCharacters(rightAuthor) {
 
     }
 
+    if (difficulty) {
+        let threeNames = [rightAuthorName, fakeCharacterName1, fakeCharacterName2];
+
+        // is the "threeNames =" needed?
+
+        threeNames = shuffle(threeNames);
+
+        document.getElementById('char-1').innerText = threeNames[0];
+        document.getElementById('char-2').innerText = threeNames[1];
+        document.getElementById('char-3').innerText = threeNames[2];
+    } else {
+        let fiveNames = [rightAuthorName, fakeCharacterName1, fakeCharacterName2, fakeCharacterName3, fakeCharacterName4];
+
+        // is the "fiveNames =" needed?
+
+        fiveNames = shuffle(fiveNames);
+
+        document.getElementById('char-1').innerText = fiveNames[0];
+        document.getElementById('char-2').innerText = fiveNames[1];
+        document.getElementById('char-3').innerText = fiveNames[2];
+        document.getElementById('char-4').innerText = fiveNames[3];
+        document.getElementById('char-5').innerText = fiveNames[4];
+    }
 
 
-    let threeNames = [rightAuthorName, fakeCharacterName1, fakeCharacterName2];
-
-    // is the "threeNames =" needed?
-
-    threeNames = shuffle(threeNames);
-
-    document.getElementById('char-1').innerText = threeNames[0];
-    document.getElementById('char-2').innerText = threeNames[1];
-    document.getElementById('char-3').innerText = threeNames[2];
 
 }
 
@@ -175,7 +220,7 @@ $('.char-btn').click(function () {
     } else {
 
         $(this).addClass('wrong-answer');
-        let characters = [document.getElementById('char-1').innerText, document.getElementById('char-2').innerText, document.getElementById('char-3').innerText];
+        let characters = [document.getElementById('char-1').innerText, document.getElementById('char-2').innerText, document.getElementById('char-3').innerText, document.getElementById('char-4').innerText, document.getElementById('char-5').innerText];
         switch (findRightAnswer(rightAuthorName, characters)) {
             case 0:
                 $('#char-1').addClass('right-answer');
@@ -186,6 +231,12 @@ $('.char-btn').click(function () {
             case 2:
                 $('#char-3').addClass('right-answer');
                 break;
+            case 3:
+                $('#char-4').addClass('right-answer');
+                break;
+            case 4:
+                $('#char-5').addClass('right-answer');
+                break;
         }
         updateScore(-2);
     }
@@ -193,6 +244,8 @@ $('.char-btn').click(function () {
         $('#char-1').removeClass('right-answer').removeClass('wrong-answer');
         $('#char-2').removeClass('right-answer').removeClass('wrong-answer');
         $('#char-3').removeClass('right-answer').removeClass('wrong-answer');
+        $('#char-4').removeClass('right-answer').removeClass('wrong-answer');
+        $('#char-5').removeClass('right-answer').removeClass('wrong-answer');
         updateProgression();
     }, 500);
 
@@ -247,19 +300,19 @@ function scoreboard(playerName, finalScore) {
     console.log(playerName);
     let players = [{
             name: 'Mark',
-            score: Math.floor(Math.random() * 10)
+            score: getRandomIntInclusive(-2 * numberOfQuotes, 5 * numberOfQuotes)
         },
         {
             name: 'Christina',
-            score: Math.floor(Math.random() * 10)
+            score: getRandomIntInclusive(-2 * numberOfQuotes, 5 * numberOfQuotes)
         },
         {
             name: 'Irene',
-            score: Math.floor(Math.random() * 10)
+            score: getRandomIntInclusive(-2 * numberOfQuotes, 5 * numberOfQuotes)
         },
         {
             name: 'Marty',
-            score: Math.floor(Math.random() * 10)
+            score: getRandomIntInclusive(-2 * numberOfQuotes, 5 * numberOfQuotes)
         },
         {
             name: playerName,
@@ -275,7 +328,22 @@ function scoreboard(playerName, finalScore) {
     $('.scoreboard').html(scoreboardHTML);
 
     $('.scoreboard').removeClass('hidden');
+    $('#start-over').removeClass('hidden');
 
+
+}
+
+$('#start-over').click(function () {
+    document.getElementById('progression').innerText = 1;
+    document.getElementById('score').innerText = 0;
+    beginning();
+});
+
+//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
+function getRandomIntInclusive(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
 }
 
 // https://stackoverflow.com/a/1129270
@@ -315,6 +383,9 @@ function lotr() {
                     // once all quotes and all characters are loaded, start game
                     $('.player').addClass('hidden');
                     $('.characters').removeClass('hidden');
+                    if (!difficulty) {
+                        $('.characters-hard').removeClass('hidden');
+                    }
                     $('.score-area').removeClass('hidden');
                     $('.progression-area').removeClass('hidden');
                     document.getElementById('number-of-quotes').innerText = numberOfQuotes;
@@ -339,6 +410,9 @@ function got() {
     allAuthors = ["Bronn", "Brynden Tully", "Cersei", "The Hound", "Jaime Lannister", "Littlefinger", "Olenna Tyrell", "Renly Baratheon", "Tyrion", "Varys"];
     $('.player').addClass('hidden');
     $('.characters').removeClass('hidden');
+    if (!difficulty) {
+        $('.characters-hard').removeClass('hidden');
+    }
     $('.score-area').removeClass('hidden');
     $('.progression-area').removeClass('hidden');
     document.getElementById('number-of-quotes').innerText = numberOfQuotes;
