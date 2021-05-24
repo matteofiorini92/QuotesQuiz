@@ -90,3 +90,26 @@ header {
 .btn:hover{
   color: #FFF;
 }
+
+.quote {
+  font-size: xx-large;
+  font-style: italic;
+  margin-bottom: 40px;
+}
+
+
+#start-btn {
+  margin-top: 50px;
+}
+
+.start-title {
+  font-size: 25px;
+}
+
+.player {
+  text-align: center;
+}
+
+.row {
+  padding-top: 20px;
+}

@@ -12,7 +12,8 @@
     <script src="https://kit.fontawesome.com/862a408407.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="assets/css/style.css">
     <!-- https://gitbrent.github.io/bootstrap4-toggle/ -->
-    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
+        rel="stylesheet">
     <title>QuotesQuiz</title>
 </head>
 
@@ -24,64 +25,84 @@
 
     <!-- main section -->
 
-    <section class="container">
-        <row>
+    <section class="player">
+        <div class="container">
+            <div class="row">
 
-            <!-- start page - displayed at the beginning, hidden when game starts -->
-
-            <div class="player">
-                <h3>Name:</h3>
-                <input type="text" id="player-name">
-                <h3>Number of quotes to guess:</h3>
-                <select name="quotes" id="quotes">
-                </select>
-                <h3>Topic</h3>
-                <select name="topic" id="topic">
-                    <option value="lotr">Lord Of The Rings</option>
-                    <option value="got">Game Of Thrones</option>
-                    <option value="friends">Friends</option>
-                </select>
-                <h3>Difficulty</h3>
-                <!-- https://gitbrent.github.io/bootstrap4-toggle/ -->
-                <input type="checkbox" checked data-toggle="toggle" data-on="Easy" data-off="Hard" data-onstyle="success" data-offstyle="danger" id="difficulty">
-                <br>
-                <button type="submit" id="start-btn" class="btn btn-ripple-out">Enter</button>
+                <!-- start page - displayed at the beginning, hidden when game starts -->
+                <div class="col-md-2"></div>
+                <div class="player col-12 col-md-4">
+                    <h3 class="start-title">Name:</h3>
+                    <input type="text" id="player-name">
+                </div>
+                <div class="col-12 col-md-4">
+                    <h3 class="start-title">Quotes to guess:</h3>
+                    <select name="quotes" id="quotes">
+                    </select>
+                </div>
+                <div class="col-md-2"></div>
             </div>
-
-            <!-- game page - displayed when game starts, hidden when game ends -->
-
-            <div class="quote"></div>
-
-            <div class="characters hidden">
-                <button class="char-btn btn btn-primary" id="char-1"></button>
-                <button class="char-btn btn btn-primary" id="char-2"></button>
-                <button class="char-btn btn btn-primary" id="char-3"></button>
-                <!-- additional characters for difficulty = hard -->
-                <div class="characters-hard hidden">
-                    <button class="char-btn btn btn-primary" id="char-4"></button>
-                    <button class="char-btn btn btn-primary" id="char-5"></button>
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-12 col-md-4">
+                    <h3 class="start-title">Topic</h3>
+                    <select name="topic" id="topic">
+                        <option value="lotr">Lord Of The Rings</option>
+                        <option value="got">Game Of Thrones</option>
+                        <option value="friends">Friends</option>
+                    </select>
+                </div>
+                <div class="col-12 col-md-4">
+                    <h3 class="start-title">Difficulty</h3>
+                    <!-- https://gitbrent.github.io/bootstrap4-toggle/ -->
+                    <input type="checkbox" checked data-toggle="toggle" data-on="Easy" data-off="Hard"
+                        data-onstyle="success" data-offstyle="danger" id="difficulty">
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+            <div class="row">
+                <div class="col-12 enter-container">
+                    <button type="submit" id="start-btn" class="btn btn-ripple-out">Enter</button>
                 </div>
             </div>
 
-            <div class="score-area hidden">
-                <span id="score">0</span>
-            </div>
+        </div>
 
-            <div class="progression-area hidden">
-                <span id="progression">1</span>/<span id="number-of-quotes">0</span>
-            </div>
-
-            <!-- results page - displayed at the end of the game  -->
-
-            <div class="scoreboard hidden">
-            </div>
-            <button id="start-over" class="hidden">Start Over</button>
-        </row>
     </section>
+    <!-- game page - displayed when game starts, hidden when game ends -->
+
+    <div class="quote"></div>
+
+    <div class="characters hidden">
+        <button class="char-btn btn btn-primary" id="char-1"></button>
+        <button class="char-btn btn btn-primary" id="char-2"></button>
+        <button class="char-btn btn btn-primary" id="char-3"></button>
+        <!-- additional characters for difficulty = hard -->
+        <div class="characters-hard hidden">
+            <button class="char-btn btn btn-primary" id="char-4"></button>
+            <button class="char-btn btn btn-primary" id="char-5"></button>
+        </div>
+    </div>
+
+    <div class="score-area hidden">
+        <span id="score">0</span>
+    </div>
+
+    <div class="progression-area hidden">
+        <span id="progression">1</span>/<span id="number-of-quotes">0</span>
+    </div>
+
+    <!-- results page - displayed at the end of the game  -->
+
+    <div class="scoreboard hidden">
+    </div>
+    <button id="start-over" class="hidden">Start Over</button>
+
+
 
 
     <!--     link to js file and jquery -->
-   
+
     <script src="https://code.jquery.com/jquery-3.6.0.js"
         integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="assets/js/script.js"></script>
