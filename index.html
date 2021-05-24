@@ -45,7 +45,7 @@
                 <!-- https://gitbrent.github.io/bootstrap4-toggle/ -->
                 <input type="checkbox" checked data-toggle="toggle" data-on="Easy" data-off="Hard" data-onstyle="success" data-offstyle="danger" id="difficulty">
                 <br>
-                <button type="submit" id="start-btn">Enter</button>
+                <button type="submit" id="start-btn" class="btn btn-ripple-out">Enter</button>
             </div>
 
             <!-- game page - displayed when game starts, hidden when game ends -->
@@ -53,13 +53,13 @@
             <div class="quote"></div>
 
             <div class="characters hidden">
-                <button class="char-btn" id="char-1"></button>
-                <button class="char-btn" id="char-2"></button>
-                <button class="char-btn" id="char-3"></button>
+                <button class="char-btn btn btn-primary" id="char-1"></button>
+                <button class="char-btn btn btn-primary" id="char-2"></button>
+                <button class="char-btn btn btn-primary" id="char-3"></button>
                 <!-- additional characters for difficulty = hard -->
                 <div class="characters-hard hidden">
-                    <button class="char-btn" id="char-4"></button>
-                    <button class="char-btn" id="char-5"></button>
+                    <button class="char-btn btn btn-primary" id="char-4"></button>
+                    <button class="char-btn btn btn-primary" id="char-5"></button>
                 </div>
             </div>
 

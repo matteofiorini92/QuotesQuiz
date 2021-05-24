@@ -215,39 +215,39 @@ function updateProgression() {
 $('.char-btn').click(function () {
     if (rightAuthorName === this.innerText) {
 
-        $(this).addClass('right-answer');
+        $(this).removeClass('btn-primary').addClass('right-answer');
         updateScore(5);
     } else {
 
-        $(this).addClass('wrong-answer');
+        $(this).removeClass('btn-primary').addClass('wrong-answer');
         let characters = [document.getElementById('char-1').innerText, document.getElementById('char-2').innerText, document.getElementById('char-3').innerText, document.getElementById('char-4').innerText, document.getElementById('char-5').innerText];
         switch (findRightAnswer(rightAuthorName, characters)) {
             case 0:
-                $('#char-1').addClass('right-answer');
+                $('#char-1').removeClass('btn-primary').addClass('right-answer');
                 break;
             case 1:
-                $('#char-2').addClass('right-answer');
+                $('#char-2').removeClass('btn-primary').addClass('right-answer');
                 break;
             case 2:
-                $('#char-3').addClass('right-answer');
+                $('#char-3').removeClass('btn-primary').addClass('right-answer');
                 break;
             case 3:
-                $('#char-4').addClass('right-answer');
+                $('#char-4').removeClass('btn-primary').addClass('right-answer');
                 break;
             case 4:
-                $('#char-5').addClass('right-answer');
+                $('#char-5').removeClass('btn-primary').addClass('right-answer');
                 break;
         }
         updateScore(-2);
     }
     setTimeout(function () {
-        $('#char-1').removeClass('right-answer').removeClass('wrong-answer');
-        $('#char-2').removeClass('right-answer').removeClass('wrong-answer');
-        $('#char-3').removeClass('right-answer').removeClass('wrong-answer');
-        $('#char-4').removeClass('right-answer').removeClass('wrong-answer');
-        $('#char-5').removeClass('right-answer').removeClass('wrong-answer');
+        $('#char-1').removeClass('right-answer').removeClass('wrong-answer').addClass('btn-primary');
+        $('#char-2').removeClass('right-answer').removeClass('wrong-answer').addClass('btn-primary');
+        $('#char-3').removeClass('right-answer').removeClass('wrong-answer').addClass('btn-primary');
+        $('#char-4').removeClass('right-answer').removeClass('wrong-answer').addClass('btn-primary');
+        $('#char-5').removeClass('right-answer').removeClass('wrong-answer').addClass('btn-primary');
         updateProgression();
-    }, 500);
+    }, 1500);
 
 
 });
@@ -382,6 +382,7 @@ function lotr() {
                     console.log(allAuthors);
                     // once all quotes and all characters are loaded, start game
                     $('.player').addClass('hidden');
+                    $('.quote').removeClass('hidden');
                     $('.characters').removeClass('hidden');
                     if (!difficulty) {
                         $('.characters-hard').removeClass('hidden');
@@ -409,6 +410,7 @@ function lotr() {
 function got() {
     allAuthors = ["Bronn", "Brynden Tully", "Cersei", "The Hound", "Jaime Lannister", "Littlefinger", "Olenna Tyrell", "Renly Baratheon", "Tyrion", "Varys"];
     $('.player').addClass('hidden');
+    $('.quote').removeClass('hidden');
     $('.characters').removeClass('hidden');
     if (!difficulty) {
         $('.characters-hard').removeClass('hidden');
