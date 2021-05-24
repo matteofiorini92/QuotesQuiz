@@ -1,5 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500&display=swap');
+
 body {
-  background-color: lightslategray;
+  background-color: rgb(7, 65, 122);
+  font-family:'Ubuntu', sans-serif;
+  color: #FFF;
 }
 
 h1 {
@@ -100,6 +104,9 @@ header {
 
 #start-btn {
   margin-top: 50px;
+  width: 200px;
+  font-size: xx-large;
+  background-color: rgb(100 167 255);;
 }
 
 .start-title {
@@ -110,6 +117,23 @@ header {
   text-align: center;
 }
 
-.row {
+/* .row {
   padding-top: 20px;
+} */
+
+.form-field {
+  background:rgb(100 167 255);
+  padding: 12px;
+  margin-bottom: 12px;
+  text-align: -webkit-center;
+}
+
+.form-select {
+  background-color: rgb(95 97 160);
+  color: #fff;
+  width: auto;
+}
+
+.form-control {
+  width: auto;
 }

@@ -30,33 +30,38 @@
             <div class="row">
 
                 <!-- start page - displayed at the beginning, hidden when game starts -->
-                <div class="col-md-2"></div>
-                <div class="player col-12 col-md-4">
+                <div class="col-1 col-md-2"></div>
+                <div class="player col-10 col-md-4 form-field">
                     <h3 class="start-title">Name:</h3>
-                    <input type="text" id="player-name">
+                    <input type="text" id="player-name" class="form-control">
                 </div>
-                <div class="col-12 col-md-4">
-                    <h3 class="start-title">Quotes to guess:</h3>
-                    <select name="quotes" id="quotes">
+                <div class="col-1 d-md-none"></div>
+                <div class="col-1 d-md-none"></div>
+                <div class="col-10 col-md-4 form-field">
+                    <h3 class="start-title">Levels</h3>
+                    <select name="quotes" id="quotes" class="form-select">
                     </select>
                 </div>
+                <div class="col-1 d-md-none"></div>
                 <div class="col-md-2"></div>
             </div>
             <div class="row">
-                <div class="col-md-2"></div>
-                <div class="col-12 col-md-4">
+                <div class="col-1 col-md-2"></div>
+                <div class="col-10 col-md-4 form-field">
                     <h3 class="start-title">Topic</h3>
-                    <select name="topic" id="topic">
+                    <select name="topic" id="topic" class="form-select">
                         <option value="lotr">Lord Of The Rings</option>
                         <option value="got">Game Of Thrones</option>
                         <option value="friends">Friends</option>
                     </select>
                 </div>
-                <div class="col-12 col-md-4">
+                <div class="col-1 d-md-none"></div>
+                <div class="col-1 d-md-none"></div>
+                <div class="col-10 col-md-4 form-field">
                     <h3 class="start-title">Difficulty</h3>
                     <!-- https://gitbrent.github.io/bootstrap4-toggle/ -->
                     <input type="checkbox" checked data-toggle="toggle" data-on="Easy" data-off="Hard"
-                        data-onstyle="success" data-offstyle="danger" id="difficulty">
+                        data-onstyle="primary" data-offstyle="dark" id="difficulty">
                 </div>
                 <div class="col-md-2"></div>
             </div>
