@@ -2,8 +2,16 @@
 
 body {
   background-color: rgb(7, 65, 122);
-  font-family:'Ubuntu', sans-serif;
+  font-family: 'Ubuntu', sans-serif;
   color: #FFF;
+  background-image: url("/assets/img/background-2.png");
+  background-size: cover;
+}
+
+@media only screen and (max-width: 1420px) {
+  body {
+    background-size: contain;
+  }
 }
 
 h1 {
@@ -91,7 +99,7 @@ header {
   height: 50px;
 }
 
-.btn:hover{
+.btn:hover {
   color: #FFF;
 }
 
@@ -106,7 +114,8 @@ header {
   margin-top: 50px;
   width: 200px;
   font-size: xx-large;
-  background-color: rgb(100 167 255);;
+  background-color: rgb(100 167 255);
+  ;
 }
 
 .start-title {
@@ -122,7 +131,7 @@ header {
 } */
 
 .form-field {
-  background:rgb(100 167 255);
+  background: rgb(100 167 255);
   padding: 12px;
   margin-bottom: 12px;
   text-align: -webkit-center;
