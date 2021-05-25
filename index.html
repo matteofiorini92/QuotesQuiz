@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- link to css and bootstrap -->
-
+    <!-- link to w3.css, css and bootstrap -->
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/862a408407.js" crossorigin="anonymous"></script>
@@ -76,35 +76,47 @@
         </div>
 
     </section>
+
     <!-- game page - displayed when game starts, hidden when game ends -->
-
-    <div class="quote"></div>
-
-    <div class="characters hidden">
-        <button class="char-btn btn btn-primary" id="char-1"></button>
-        <button class="char-btn btn btn-primary" id="char-2"></button>
-        <button class="char-btn btn btn-primary" id="char-3"></button>
-        <!-- additional characters for difficulty = hard -->
-        <div class="characters-hard hidden">
-            <button class="char-btn btn btn-primary" id="char-4"></button>
-            <button class="char-btn btn btn-primary" id="char-5"></button>
+    <div class="container">
+        <div class="row">
+            <div class="col-2 col-sm-3"></div>
+            <div class="col-8 col-sm-6 quote"></div>
         </div>
-    </div>
+        <div class="row">
+            <div class="col-2 col-sm-3"></div>
+            <div class="col-8 col-sm-6 characters hidden">
+                <button class="char-btn btn btn-primary" id="char-1"></button>
+                <button class="char-btn btn btn-primary" id="char-2"></button>
+                <button class="char-btn btn btn-primary" id="char-3"></button>
+                <!-- additional characters for difficulty = hard -->
+                <div class="characters-hard hidden">
+                    <button class="char-btn btn btn-primary" id="char-4"></button>
+                    <button class="char-btn btn btn-primary" id="char-5"></button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2 col-sm-3"></div>
+            <div class="col-8 col-sm-6 score-area hidden">
+                <span id="score">0</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2 col-sm-3"></div>
+            <div class="col-8 col-sm-6 w3-light-grey progression-area hidden">
+                <div class="w3-container w3-green w3-center" id="progression-bar">
+                    <span id="progression">1</span>/<span id="number-of-quotes">0</span>
+                </div>
+            </div>
+        </div>
 
-    <div class="score-area hidden">
-        <span id="score">0</span>
     </div>
-
-    <div class="progression-area hidden">
-        <span id="progression">1</span>/<span id="number-of-quotes">0</span>
-    </div>
-
     <!-- results page - displayed at the end of the game  -->
 
     <div class="scoreboard hidden">
     </div>
     <button id="start-over" class="hidden">Start Over</button>
-
 
 
 

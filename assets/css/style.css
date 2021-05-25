@@ -5,13 +5,7 @@ body {
   font-family: 'Ubuntu', sans-serif;
   color: #FFF;
   background-image: url("/assets/img/background-2.png");
-  background-size: cover;
-}
-
-@media only screen and (max-width: 1420px) {
-  body {
-    background-size: contain;
-  }
+  background-size: 100% auto;
 }
 
 h1 {
@@ -97,6 +91,7 @@ header {
 .char-btn {
   width: 200px;
   height: 50px;
+  display: block;
 }
 
 .btn:hover {
@@ -145,4 +140,14 @@ header {
 
 .form-control {
   width: auto;
+}
+
+#progression-bar {
+  width: 25%;
+}
+
+
+.progression-area {
+  width: 50%;
+  padding: 0;
 }
