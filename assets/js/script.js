@@ -33,6 +33,11 @@ function beginning() {
             if (!playerName) {
                 alert("Come on, you must have a name!");
             } else {
+                // https://css-tricks.com/updating-a-css-variable-with-javascript/
+                let progressionPercentage = (1 / numberOfQuotes) * 100;
+                let root = document.documentElement;
+                root.style.setProperty('--progression-percentage', progressionPercentage + '%');
+
                 switch (topic) {
                     case 'lotr':
                         lotr();
@@ -209,6 +214,10 @@ function updateProgression() {
     let currentProgression = parseInt(document.getElementById('progression').innerText);
     currentProgression++;
     document.getElementById('progression').innerText = currentProgression;
+    // https://css-tricks.com/updating-a-css-variable-with-javascript/
+    let progressionPercentage = (currentProgression / numberOfQuotes) * 100;
+    let root = document.documentElement;
+    root.style.setProperty('--progression-percentage', progressionPercentage + '%');
     playGame();
 }
 

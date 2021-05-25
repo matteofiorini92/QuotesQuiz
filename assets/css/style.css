@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500&display=swap');
 
+:root {
+  --progression-percentage: 100%;
+}
+
 body {
   background-color: rgb(7, 65, 122);
   font-family: 'Ubuntu', sans-serif;
@@ -143,7 +147,7 @@ header {
 }
 
 #progression-bar {
-  width: 25%;
+  width: var(--progression-percentage);
 }
 
 
