@@ -5,11 +5,17 @@
 }
 
 body {
-  background-color: rgb(7, 65, 122);
   font-family: 'Ubuntu', sans-serif;
   color: #FFF;
-  background-image: url("/assets/img/background-2.png");
+  background-image: url("/assets/img/background-3.png");
   background-size: 100% auto;
+}
+
+.main-container {
+  background-color: rgba(30, 101, 183, 0.8);
+  height: 100%;
+  width: 75%;
+  margin-left: 12.5%;
 }
 
 h1 {
@@ -98,6 +104,7 @@ header {
   width: 200px;
   height: 50px;
   display: block;
+  margin: auto;
 }
 
 .btn:hover {
@@ -156,4 +163,22 @@ header {
 .progression-area {
   width: 50%;
   padding: 0;
+}
+
+#player-name {
+  width: 80%;
+}
+
+.score-area {
+  font-size: 50px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.positive-score {
+  color: rgb(0, 59, 0);
+}
+
+.negative-score {
+  color: rgb(80, 0, 0);
 }

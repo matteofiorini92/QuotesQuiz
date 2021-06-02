@@ -298,10 +298,18 @@ function shuffle(array) {
 }
 
 function updateScore(points) {
-
-    let currentScore = parseInt(document.getElementById('score').innerText);
+    let score = $('#score');
+    let currentScore = parseInt(score[0].innerText);
+    console.log(score);
     currentScore += points;
-    document.getElementById('score').innerText = currentScore;
+    score[0].innerText = currentScore;
+    if (currentScore > 0) {
+        score.removeClass().addClass('positive-score');
+    } else if (currentScore < 0) {
+        score.removeClass().addClass('negative-score');
+    } else {
+        score.removeClass();
+    }
 }
 
 
@@ -392,9 +400,14 @@ function lotr() {
                     // once all quotes and all characters are loaded, start game
                     $('.player').addClass('hidden');
                     $('.quote').removeClass('hidden');
-                    $('.characters').removeClass('hidden');
-                    if (!difficulty) {
+                    if (difficulty) {
+                        $('.characters').removeClass('hidden');
+                        // $('.btn-container').addClass('col-12 col-md-3');
+                    } else {
+                        $('.characters').removeClass('hidden');
                         $('.characters-hard').removeClass('hidden');
+                        // $('.btn-container').addClass('col-12 col-md-3');
+                        // $('.btn-container-hard').addClass('col-12 col-md-4');
                     }
                     $('.score-area').removeClass('hidden');
                     $('.progression-area').removeClass('hidden');
@@ -403,13 +416,13 @@ function lotr() {
                 }
             }
             charactersRequest.onerror = function (e) {
-                console.error(charactersRequest.statusText)
+                console.error(e.statusText)
             }
             charactersRequest.send();
         }
     }
     quotesRequest.onerror = function (e) {
-        console.error(quotesRequest.statusText)
+        console.error(e.statusText);
     }
     quotesRequest.send();
 }
