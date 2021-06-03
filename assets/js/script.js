@@ -64,6 +64,7 @@ function playGame() {
         let finalScore = parseInt(document.getElementById('score').innerText);
         $('.quote').addClass('hidden');
         $('.characters').addClass('hidden');
+        $('.characters-hard').addClass('hidden');
         $('.score-area').addClass('hidden');
         $('.progression-area').addClass('hidden');
 
