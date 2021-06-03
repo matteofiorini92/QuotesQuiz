@@ -15,7 +15,7 @@ body {
 }
 
 .background {
-  background-image: url("/assets/img/background-3.png");
+  background-image: url("../img/background-3.png");
   background-size: 100% auto;
   min-height: 100vh;
 }
