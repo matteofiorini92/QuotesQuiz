@@ -109,72 +109,98 @@ function getQuote() {
 }
 
 function getCharacters(rightAuthor) {
-
+    let names = [];
+    let numberOfFakes = difficulty ? 2 : 4 // difficulty = true > easy game, only 2 fakes, else 4 fakes
     switch (topic) {
 
         case 'lotr':
-            //get names and ids of two fake characters
-
-            do {
-                let rnd = Math.floor(Math.random() * allAuthors.docs.length);
-                var fakeCharacterId1 = allAuthors.docs[rnd]._id;
-                var fakeCharacterName1 = allAuthors.docs[rnd].name;
-            } while (fakeCharacterId1 === rightAuthor);
-
-            do {
-                let rnd = Math.floor(Math.random() * allAuthors.docs.length);
-                var fakeCharacterId2 = allAuthors.docs[rnd]._id;
-                var fakeCharacterName2 = allAuthors.docs[rnd].name;
-            } while (fakeCharacterId2 === rightAuthor);
-
-            // difficulty = hard >> two more characters
-            if (!difficulty) {
-                do {
-                    let rnd = Math.floor(Math.random() * allAuthors.docs.length);
-                    var fakeCharacterId3 = allAuthors.docs[rnd]._id;
-                    var fakeCharacterName3 = allAuthors.docs[rnd].name;
-                } while (fakeCharacterId3 === rightAuthor);
-
-                do {
-                    let rnd = Math.floor(Math.random() * allAuthors.docs.length);
-                    var fakeCharacterId4 = allAuthors.docs[rnd]._id;
-                    var fakeCharacterName4 = allAuthors.docs[rnd].name;
-                } while (fakeCharacterId4 === rightAuthor);
-
-            }
 
             // find name of right character
 
             for (let i = 0; i < allAuthors.docs.length; i++) {
                 if (rightAuthor === allAuthors.docs[i]._id) {
                     rightAuthorName = allAuthors.docs[i].name;
-                    // break;
+                    break;
                 }
             }
+            names.push(rightAuthorName);
+            //get names and ids of two fake characters
+
+            for (let i = 0; i < numberOfFakes; i++) {
+                do {
+                    let rnd = Math.floor(Math.random() * allAuthors.docs.length);
+                    // var fakeCharacterId = allAuthors.docs[rnd]._id;
+                    var fakeCharacterName = allAuthors.docs[rnd].name;
+                } while (names.includes(fakeCharacterName));
+                names.push(fakeCharacterName);
+            }
+
+            // do {
+            //     let rnd = Math.floor(Math.random() * allAuthors.docs.length);
+            //     var fakeCharacterId1 = allAuthors.docs[rnd]._id;
+            //     var fakeCharacterName1 = allAuthors.docs[rnd].name;
+            // } while (fakeCharacterId1 === rightAuthor);
+
+            // do {
+            //     let rnd = Math.floor(Math.random() * allAuthors.docs.length);
+            //     var fakeCharacterId2 = allAuthors.docs[rnd]._id;
+            //     var fakeCharacterName2 = allAuthors.docs[rnd].name;
+            // } while (fakeCharacterId2 === rightAuthor);
+
+            // // difficulty = hard >> two more characters
+            // if (!difficulty) {
+            //     do {
+            //         let rnd = Math.floor(Math.random() * allAuthors.docs.length);
+            //         var fakeCharacterId3 = allAuthors.docs[rnd]._id;
+            //         var fakeCharacterName3 = allAuthors.docs[rnd].name;
+            //     } while (fakeCharacterId3 === rightAuthor);
+
+            //     do {
+            //         let rnd = Math.floor(Math.random() * allAuthors.docs.length);
+            //         var fakeCharacterId4 = allAuthors.docs[rnd]._id;
+            //         var fakeCharacterName4 = allAuthors.docs[rnd].name;
+            //     } while (fakeCharacterId4 === rightAuthor);
+
+            // }
+
             break;
 
         case 'got':
-            do {
-                let rnd = Math.floor(Math.random() * allAuthors.length);
-                var fakeCharacterName1 = allAuthors[rnd];
-            } while (fakeCharacterName1 === rightAuthor);
-            do {
-                let rnd = Math.floor(Math.random() * allAuthors.length);
-                var fakeCharacterName2 = allAuthors[rnd];
-            } while (fakeCharacterName2 === rightAuthor);
 
-
-            if (!difficulty) {
-                do {
-                    let rnd = Math.floor(Math.random() * allAuthors.length);
-                    var fakeCharacterName3 = allAuthors[rnd];
-                } while (fakeCharacterName3 === rightAuthor);
-                do {
-                    let rnd = Math.floor(Math.random() * allAuthors.length);
-                    var fakeCharacterName4 = allAuthors[rnd];
-                } while (fakeCharacterName4 === rightAuthor);
-            }
             rightAuthorName = rightAuthor;
+
+            names.push(rightAuthorName);
+
+            for (let i = 0; i < numberOfFakes; i++) {
+                do {
+                    let rnd = Math.floor(Math.random() * allAuthors.length);
+                    // var fakeCharacterId = allAuthors.docs[rnd]._id;
+                    var fakeCharacterName = allAuthors[rnd];
+                } while (names.includes(fakeCharacterName));
+                names.push(fakeCharacterName);
+            }
+
+            // do {
+            //     let rnd = Math.floor(Math.random() * allAuthors.length);
+            //     var fakeCharacterName1 = allAuthors[rnd];
+            // } while (fakeCharacterName1 === rightAuthor);
+            // do {
+            //     let rnd = Math.floor(Math.random() * allAuthors.length);
+            //     var fakeCharacterName2 = allAuthors[rnd];
+            // } while (fakeCharacterName2 === rightAuthor);
+
+
+            // if (!difficulty) {
+            //     do {
+            //         let rnd = Math.floor(Math.random() * allAuthors.length);
+            //         var fakeCharacterName3 = allAuthors[rnd];
+            //     } while (fakeCharacterName3 === rightAuthor);
+            //     do {
+            //         let rnd = Math.floor(Math.random() * allAuthors.length);
+            //         var fakeCharacterName4 = allAuthors[rnd];
+            //     } while (fakeCharacterName4 === rightAuthor);
+            // }
+            // rightAuthorName = rightAuthor;
             break;
 
         default:
@@ -182,31 +208,39 @@ function getCharacters(rightAuthor) {
 
     }
 
-    if (difficulty) {
-        let threeNames = [rightAuthorName, fakeCharacterName1, fakeCharacterName2];
+    // if (difficulty) {
+    //     let threeNames = [rightAuthorName, fakeCharacterName1, fakeCharacterName2];
 
-        // is the "threeNames =" needed?
+    //     // is the "threeNames =" needed?
 
-        threeNames = shuffle(threeNames);
+    //     threeNames = shuffle(threeNames);
 
-        document.getElementById('char-1').innerText = threeNames[0];
-        document.getElementById('char-2').innerText = threeNames[1];
-        document.getElementById('char-3').innerText = threeNames[2];
-    } else {
-        let fiveNames = [rightAuthorName, fakeCharacterName1, fakeCharacterName2, fakeCharacterName3, fakeCharacterName4];
+    //     document.getElementById('char-1').innerText = threeNames[0];
+    //     document.getElementById('char-2').innerText = threeNames[1];
+    //     document.getElementById('char-3').innerText = threeNames[2];
+    // } else {
+    //     let fiveNames = [rightAuthorName, fakeCharacterName1, fakeCharacterName2, fakeCharacterName3, fakeCharacterName4];
 
-        // is the "fiveNames =" needed?
+    //     // is the "fiveNames =" needed?
 
-        fiveNames = shuffle(fiveNames);
+    //     fiveNames = shuffle(fiveNames);
 
-        document.getElementById('char-1').innerText = fiveNames[0];
-        document.getElementById('char-2').innerText = fiveNames[1];
-        document.getElementById('char-3').innerText = fiveNames[2];
-        document.getElementById('char-4').innerText = fiveNames[3];
-        document.getElementById('char-5').innerText = fiveNames[4];
+    //     document.getElementById('char-1').innerText = fiveNames[0];
+    //     document.getElementById('char-2').innerText = fiveNames[1];
+    //     document.getElementById('char-3').innerText = fiveNames[2];
+    //     document.getElementById('char-4').innerText = fiveNames[3];
+    //     document.getElementById('char-5').innerText = fiveNames[4];
+    // }
+
+    names = shuffle(names);
+    document.getElementById('char-1').innerText = names[0];
+    document.getElementById('char-2').innerText = names[1];
+    document.getElementById('char-3').innerText = names[2];
+
+    if (!difficulty) {
+        document.getElementById('char-4').innerText = names[3];
+        document.getElementById('char-5').innerText = names[4];
     }
-
-
 
 }
 
@@ -390,7 +424,7 @@ function getRandom() {
             fakeScore += 5
         }
     }
-    return fakeScore; 
+    return fakeScore;
 }
 
 // https://stackoverflow.com/a/1129270
