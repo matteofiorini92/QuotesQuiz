@@ -6,12 +6,12 @@ let topic = "";
 let difficulty = "";
 let numberOfQuotes = "";
 let quoteText = "";
+var apiKey = config.apiKey;
 
 
-$('document').ready(beginning);
+$('document').ready(start);
 
-function beginning() {
-
+function start() {
 
     $('.player').removeClass('hidden');
     $('.scoreboard').addClass('hidden');
@@ -25,7 +25,6 @@ function beginning() {
 
     $('#start-btn').click(
         function () {
-
             playerName = document.getElementById('player-name').value;
             numberOfQuotes = document.getElementById('quotes').value;
             topic = document.getElementById('topic').value;
@@ -68,6 +67,12 @@ function playGame() {
         getQuote();
     } else {
         let finalScore = parseInt(document.getElementById('score').innerText);
+        $('.quote').html = "";
+        $('#char-1').html = "";
+        $('#char-2').html = "";
+        $('#char-3').html = "";
+        $('#char-4').html = "";
+        $('#char-5').html = "";
         $('.quote').addClass('hidden');
         $('.characters').addClass('hidden');
         $('.characters-hard').addClass('hidden');
@@ -122,6 +127,7 @@ function getQuote() {
                 }
             }
             quoteRequest.send();
+            console.log(quote);
             break;
         case 'bb':
             quoteId = Math.floor(Math.random() * allQuotes.length);
@@ -314,7 +320,6 @@ function shuffle(array) {
 function updateScore(points) {
     let score = $('#score');
     let currentScore = parseInt(score[0].innerText);
-    console.log(score);
     currentScore += points;
     score[0].innerText = currentScore;
     if (currentScore > 0) {
@@ -383,7 +388,7 @@ function scoreboard(playerName, finalScore) {
 $('#start-over').click(function () {
     document.getElementById('progression').innerText = 1;
     document.getElementById('score').innerText = 0;
-    beginning();
+    start();
 });
 
 // //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
@@ -424,7 +429,7 @@ function lotr() {
 
     let quotesRequest = new XMLHttpRequest();
     quotesRequest.open('GET', 'https://the-one-api.dev/v2/quote/');
-    quotesRequest.setRequestHeader('Authorization', 'Bearer TLVn4EUDXxn5E9lePgAT');
+    quotesRequest.setRequestHeader('Authorization', 'Bearer ' + apiKey);
     quotesRequest.onload = function () {
         if (quotesRequest.status === 200) {
             allQuotes = $.parseJSON(quotesRequest.responseText);
@@ -433,7 +438,7 @@ function lotr() {
 
             let charactersRequest = new XMLHttpRequest();
             charactersRequest.open('GET', 'https://the-one-api.dev/v2/character/');
-            charactersRequest.setRequestHeader('Authorization', 'Bearer TLVn4EUDXxn5E9lePgAT');
+            charactersRequest.setRequestHeader('Authorization', 'Bearer ' + apiKey);
 
             charactersRequest.onload = function () {
                 if (charactersRequest.status === 200) {
