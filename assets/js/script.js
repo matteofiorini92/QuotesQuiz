@@ -6,7 +6,6 @@ let topic = "";
 let difficulty = "";
 let numberOfQuotes = "";
 let quoteText = "";
-var apiKey = config.apiKey;
 
 
 $('document').ready(start);
@@ -431,7 +430,7 @@ function lotr() {
 
     let quotesRequest = new XMLHttpRequest();
     quotesRequest.open('GET', 'https://the-one-api.dev/v2/quote/');
-    quotesRequest.setRequestHeader('Authorization', 'Bearer ' + apiKey);
+    quotesRequest.setRequestHeader('Authorization', 'Bearer TLVn4EUDXxn5E9lePgAT');
     quotesRequest.onload = function () {
         if (quotesRequest.status === 200) {
             allQuotes = $.parseJSON(quotesRequest.responseText);
@@ -440,7 +439,7 @@ function lotr() {
 
             let charactersRequest = new XMLHttpRequest();
             charactersRequest.open('GET', 'https://the-one-api.dev/v2/character/');
-            charactersRequest.setRequestHeader('Authorization', 'Bearer ' + apiKey);
+            charactersRequest.setRequestHeader('Authorization', 'Bearer TLVn4EUDXxn5E9lePgAT');
 
             charactersRequest.onload = function () {
                 if (charactersRequest.status === 200) {
