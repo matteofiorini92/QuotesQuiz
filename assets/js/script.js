@@ -314,7 +314,6 @@ function updateScore(points) {
 
 
 function scoreboard(playerName, finalScore) {
-    console.log(playerName);
     let players = [{
             name: 'Mark',
             score: getRandomIntInclusive(-2 * numberOfQuotes, 5 * numberOfQuotes)
@@ -338,10 +337,27 @@ function scoreboard(playerName, finalScore) {
     ];
 
     players.sort(compare);
-    let scoreboardHTML = "";
+    //https://getbootstrap.com/docs/4.1/content/tables/
+    let scoreboardHTML = `
+    <table class="table table-hover table-dark">
+    <thead>
+    <tr>
+    <th scope="col">#</th>
+    <th scope="col">Player</th>
+    <th scope="col" class="column-score">Score</th>
+    </tr>
+    </thead>
+    <tbody>
+    `;
     for (let i = 0; i < players.length; i++) {
-        scoreboardHTML += `<p>${i+1} - ${players[i].score} ${players[i].name}</p>`;
+        scoreboardHTML += `<tr>
+        <th scope="row">${i+1}</td>
+        <td class="table-player">${players[i].name}</td>
+        <td class="table-score">${players[i].score}</td>
+        </tr>`;
     }
+    scoreboardHTML += `</tbody>
+    </table>`;
     $('.scoreboard').html(scoreboardHTML);
 
     $('.scoreboard').removeClass('hidden');

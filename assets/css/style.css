@@ -182,3 +182,43 @@ header {
 .negative-score {
   color: rgb(80, 0, 0);
 }
+
+.btn-primary {
+  border-color: #FFF;
+}
+
+th {
+  text-align: center;
+  font-size: 40px;
+}
+
+.table {
+  width: 80%;
+  margin: auto;
+}
+
+.table-score {
+  text-align: center;
+  font-size: 40px;
+}
+
+.table-player {
+  text-align: center;
+  font-size: 40px;
+}
+
+.column-score {
+  width: 25%;
+}
+
+.table-dark {
+  --bs-table-bg: rgba(24, 83, 142, 70%);
+  --bs-table-striped-bg: rgb(13, 42, 80);
+  --bs-table-striped-color: #fff;
+  --bs-table-active-bg: rgb(13, 42, 80);
+  --bs-table-active-color: #fff;
+  --bs-table-hover-bg: rgb(13, 42, 80);
+  --bs-table-hover-color: #fff;
+  color: #fff;
+  border-color: rgb(0, 52, 90);
+}
