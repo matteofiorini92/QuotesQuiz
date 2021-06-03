@@ -174,6 +174,7 @@ To work on the project code within a local IDE such as VSCode, Pycharm etc:
 
 ## Credits
 
+Masking api key: https://dev.to/ptprashanttripathi/how-to-hide-api-key-in-github-repo-2ik9
 
 ### Acknowledgements
 
