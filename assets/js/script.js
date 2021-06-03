@@ -12,7 +12,6 @@ var apiKey = config.apiKey;
 $('document').ready(start);
 
 function start() {
-
     $('.player').removeClass('hidden');
     $('.scoreboard').addClass('hidden');
     $('.start-over-button').addClass('hidden');
@@ -24,7 +23,9 @@ function start() {
     $('#quotes').html(options);
 
     $('#start-btn').click(
-        function () {
+        function (e) {
+//https://stackoverflow.com/a/24564826
+            e.stopImmediatePropagation();
             playerName = document.getElementById('player-name').value;
             numberOfQuotes = document.getElementById('quotes').value;
             topic = document.getElementById('topic').value;
@@ -54,8 +55,10 @@ function start() {
                         console.log('invalid category');
                 }
             }
+            // return false;
         }
     );
+
 
 }
 
@@ -67,7 +70,8 @@ function playGame() {
         getQuote();
     } else {
         let finalScore = parseInt(document.getElementById('score').innerText);
-        $('.quote').html = "";
+        // $('.quote')[0].empty;
+        document.getElementsByClassName('quote')[0].innerText = "";
         $('#char-1').html = "";
         $('#char-2').html = "";
         $('#char-3').html = "";
@@ -86,7 +90,6 @@ function playGame() {
 }
 
 function getQuote() {
-
     let quoteId = "";
     let quoteRequest = new XMLHttpRequest();
     switch (topic) {
@@ -127,7 +130,6 @@ function getQuote() {
                 }
             }
             quoteRequest.send();
-            console.log(quote);
             break;
         case 'bb':
             quoteId = Math.floor(Math.random() * allQuotes.length);
@@ -443,8 +445,6 @@ function lotr() {
             charactersRequest.onload = function () {
                 if (charactersRequest.status === 200) {
                     allAuthors = $.parseJSON(charactersRequest.responseText);
-                    console.log(allQuotes);
-                    console.log(allAuthors);
                     // once all quotes and all characters are loaded, start game
                     $('.player').addClass('hidden');
                     $('.quote').removeClass('hidden');
@@ -525,8 +525,6 @@ function breakingBad() {
             charactersRequest.onload = function () {
                 if (charactersRequest.status === 200) {
                     allAuthors = $.parseJSON(charactersRequest.responseText);
-                    console.log(allQuotes);
-                    console.log(allAuthors);
                     // once all quotes and all characters are loaded, start game
                     $('.player').addClass('hidden');
                     $('.quote').removeClass('hidden');
