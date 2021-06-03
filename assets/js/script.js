@@ -15,7 +15,7 @@ function beginning() {
 
     $('.player').removeClass('hidden');
     $('.scoreboard').addClass('hidden');
-    $('#start-over').addClass('hidden');
+    $('.start-over-button').addClass('hidden');
     //populate n. of quotes to guess
     let options = "";
     for (let i = 1; i <= 20; i++) {
@@ -316,19 +316,19 @@ function updateScore(points) {
 function scoreboard(playerName, finalScore) {
     let players = [{
             name: 'Mark',
-            score: getRandomIntInclusive(-2 * numberOfQuotes, 5 * numberOfQuotes)
+            score: getRandom()
         },
         {
-            name: 'Christina',
-            score: getRandomIntInclusive(-2 * numberOfQuotes, 5 * numberOfQuotes)
+            name: 'Cris',
+            score: getRandom()
         },
         {
             name: 'Irene',
-            score: getRandomIntInclusive(-2 * numberOfQuotes, 5 * numberOfQuotes)
+            score: getRandom()
         },
         {
             name: 'Marty',
-            score: getRandomIntInclusive(-2 * numberOfQuotes, 5 * numberOfQuotes)
+            score: getRandom()
         },
         {
             name: playerName,
@@ -361,7 +361,7 @@ function scoreboard(playerName, finalScore) {
     $('.scoreboard').html(scoreboardHTML);
 
     $('.scoreboard').removeClass('hidden');
-    $('#start-over').removeClass('hidden');
+    $('.start-over-button').removeClass('hidden');
 
 
 }
@@ -372,11 +372,24 @@ $('#start-over').click(function () {
     beginning();
 });
 
-//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
-function getRandomIntInclusive(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
+// //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
+// function getRandomIntInclusive(min, max) {
+//     min = Math.ceil(min);
+//     max = Math.floor(max);
+//     return Math.floor(Math.random() * (max - min + 1) + min); //The maximum is inclusive and the minimum is inclusive
+// }
+
+function getRandom() {
+    let fakeScore = 0;
+    for (let i = 0; i < numberOfQuotes; i++) {
+        let rnd = Math.floor(Math.random() * 2); //gets random number that is either 0 or 1
+        if (rnd === 0) {
+            fakeScore += -2
+        } else {
+            fakeScore += 5
+        }
+    }
+    return fakeScore; 
 }
 
 // https://stackoverflow.com/a/1129270

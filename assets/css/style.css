@@ -7,15 +7,19 @@
 body {
   font-family: 'Ubuntu', sans-serif;
   color: #FFF;
+}
+
+.background {
   background-image: url("/assets/img/background-3.png");
   background-size: 100% auto;
 }
-
-.main-container {
+/*https://stackoverflow.com/questions/9182978/semi-transparent-color-layer-over-background-image*/
+.layer {
   background-color: rgba(30, 101, 183, 0.8);
   height: 100%;
   width: 75%;
   margin-left: 12.5%;
+  top: 0;
 }
 
 h1 {
@@ -189,7 +193,7 @@ header {
 
 th {
   text-align: center;
-  font-size: 40px;
+  font-size: 30px;
 }
 
 .table {
@@ -199,12 +203,12 @@ th {
 
 .table-score {
   text-align: center;
-  font-size: 40px;
+  font-size: 30px;
 }
 
 .table-player {
   text-align: center;
-  font-size: 40px;
+  font-size: 30px;
 }
 
 .column-score {
@@ -221,4 +225,19 @@ th {
   --bs-table-hover-color: #fff;
   color: #fff;
   border-color: rgb(0, 52, 90);
+}
+
+.start-over-button {
+  margin-top: 25px;
+  text-align: center;
+}
+
+.enter-container {
+  text-align: center;
+}
+
+footer p {
+  margin: 0;
+  padding-bottom: 15px;
+  text-align: center;
 }

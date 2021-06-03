@@ -18,119 +18,125 @@
 </head>
 
 <body>
+    <div class="background">
+        <div class="layer">
+            <header>
+                <!-- <h1>QuotesQuiz</h1> -->
+                <img src="/assets/img/logo.png">
+            </header>
 
-    <div class="main-container">
-        <header>
-            <!-- <h1>QuotesQuiz</h1> -->
-            <img src="/assets/img/logo.png">
-        </header>
+            <!-- main section -->
 
-        <!-- main section -->
+            <section class="player">
+                <div class="container">
+                    <div class="row">
 
-        <section class="player">
-            <div class="container">
-                <div class="row">
-
-                    <!-- start page - displayed at the beginning, hidden when game starts -->
-                    <div class="col-2 col-sm-3"></div>
-                    <div class="player col-8 col-sm-6 form-field">
-                        <h3 class="start-title">Name:</h3>
-                        <input type="text" id="player-name" class="form-control">
+                        <!-- start page - displayed at the beginning, hidden when game starts -->
+                        <div class="col-2 col-sm-3"></div>
+                        <div class="player col-8 col-sm-6 form-field">
+                            <h3 class="start-title">Name:</h3>
+                            <input type="text" id="player-name" class="form-control">
+                        </div>
                     </div>
-                </div>
-                <div class="row">
+                    <div class="row">
 
-                    <div class="col-2 col-sm-3"></div>
-                    <div class="col-8 col-sm-6 form-field">
-                        <h3 class="start-title">Levels</h3>
-                        <select name="quotes" id="quotes" class="form-select">
-                        </select>
+                        <div class="col-2 col-sm-3"></div>
+                        <div class="col-8 col-sm-6 form-field">
+                            <h3 class="start-title">Levels</h3>
+                            <select name="quotes" id="quotes" class="form-select">
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
+                    <div class="row">
 
-                    <div class="col-2 col-sm-3"></div>
-                    <div class="col-8 col-sm-6 form-field">
-                        <h3 class="start-title">Topic</h3>
-                        <select name="topic" id="topic" class="form-select">
-                            <option value="lotr">Lord Of The Rings</option>
-                            <option value="got">Game Of Thrones</option>
-                            <option value="friends">Friends</option>
-                        </select>
+                        <div class="col-2 col-sm-3"></div>
+                        <div class="col-8 col-sm-6 form-field">
+                            <h3 class="start-title">Topic</h3>
+                            <select name="topic" id="topic" class="form-select">
+                                <option value="lotr">Lord Of The Rings</option>
+                                <option value="got">Game Of Thrones</option>
+                                <option value="friends">Friends</option>
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-2 col-sm-3"></div>
-                    <div class="col-8 col-sm-6 form-field">
-                        <h3 class="start-title">Difficulty</h3>
-                        <!-- https://gitbrent.github.io/bootstrap4-toggle/ -->
-                        <input type="checkbox" checked data-toggle="toggle" data-on="Easy" data-off="Hard"
-                            data-onstyle="primary" data-offstyle="dark" id="difficulty">
+                    <div class="row">
+                        <div class="col-2 col-sm-3"></div>
+                        <div class="col-8 col-sm-6 form-field">
+                            <h3 class="start-title">Difficulty</h3>
+                            <!-- https://gitbrent.github.io/bootstrap4-toggle/ -->
+                            <input type="checkbox" checked data-toggle="toggle" data-on="Easy" data-off="Hard"
+                                data-onstyle="primary" data-offstyle="dark" id="difficulty">
+                        </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-2 col-sm-3"></div>
-                    <div class="col-8 col-sm-6 enter-container">
+                    <!-- <div class="row">
+                        <div class="col-2 col-sm-3"></div> 
+                        <div class="col-8 col-sm-6 enter-container">
+                            <button type="submit" id="start-btn" class="btn btn-ripple-out">Enter</button>
+                        </div>
+                    </div>
+                    -->
+                    <div class="enter-container">
                         <button type="submit" id="start-btn" class="btn btn-ripple-out">Enter</button>
                     </div>
+
                 </div>
 
-            </div>
+            </section>
 
-        </section>
-
-        <!-- game page - displayed when game starts, hidden when game ends -->
-        <div class="container">
-            <div class="row">
-                <div class="col-2 col-sm-3"></div>
-                <div class="col-8 col-sm-6 quote"></div>
-            </div>
-            <div class="row characters hidden">
-                <div class="btn-container col-12 col-sm-4">
-                    <button class="char-btn btn btn-primary" id="char-1"></button>
+            <!-- game page - displayed when game starts, hidden when game ends -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-2 col-sm-3"></div>
+                    <div class="col-8 col-sm-6 quote"></div>
                 </div>
-                <div class="btn-container col-12 col-sm-4">
-                    <button class="char-btn btn btn-primary" id="char-2"></button>
-                </div>
-                <div class="btn-container col-12 col-sm-4">
-                    <button class="char-btn btn btn-primary" id="char-3"></button>
-                </div>
-            </div>
-            <!-- additional characters for difficulty = hard -->
-            <div class="row characters-hard hidden">
-                <div class="col-sm-1"></div>
-                <div class="btn-container-hard col-12 col-sm-4">
-                    <button class="char-btn btn btn-primary" id="char-4"></button>
-                </div>
-                <div class="btn-container-hard col-12 col-sm-4">
-                    <button class="char-btn btn btn-primary" id="char-5"></button>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-2 col-sm-3"></div>
-                <div class="col-8 col-sm-6 score-area hidden">
-                    <span id="score" class="positive-score">0</span> Points
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-2 col-sm-3"></div>
-                <div class="col-8 col-sm-6 w3-light-grey progression-area hidden">
-                    <div class="w3-container w3-green w3-center" id="progression-bar">
-                        <span id="progression">1</span>/<span id="number-of-quotes">0</span>
+                <div class="row characters hidden">
+                    <div class="btn-container col-12 col-sm-4">
+                        <button class="char-btn btn btn-primary" id="char-1"></button>
+                    </div>
+                    <div class="btn-container col-12 col-sm-4">
+                        <button class="char-btn btn btn-primary" id="char-2"></button>
+                    </div>
+                    <div class="btn-container col-12 col-sm-4">
+                        <button class="char-btn btn btn-primary" id="char-3"></button>
                     </div>
                 </div>
+                <!-- additional characters for difficulty = hard -->
+                <div class="row characters-hard hidden">
+                    <div class="col-sm-1"></div>
+                    <div class="btn-container-hard col-12 col-sm-4">
+                        <button class="char-btn btn btn-primary" id="char-4"></button>
+                    </div>
+                    <div class="btn-container-hard col-12 col-sm-4">
+                        <button class="char-btn btn btn-primary" id="char-5"></button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-2 col-sm-3"></div>
+                    <div class="col-8 col-sm-6 score-area hidden">
+                        <span id="score" class="positive-score">0</span> Points
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-2 col-sm-3"></div>
+                    <div class="col-8 col-sm-6 w3-light-grey progression-area hidden">
+                        <div class="w3-container w3-green w3-center" id="progression-bar">
+                            <span id="progression">1</span>/<span id="number-of-quotes">0</span>
+                        </div>
+                    </div>
+                </div>
+
             </div>
+            <!-- results page - displayed at the end of the game  -->
 
+            <div class="scoreboard hidden">
+            </div>
+            <div class="start-over-button hidden">
+                <button id="start-over" class="btn btn-primary">Start Over</button>
+            </div>
+            <footer>
+                <p>Created by xxx</p>
+            </footer>
         </div>
-        <!-- results page - displayed at the end of the game  -->
-
-        <div class="scoreboard hidden">
-        </div>
-        <button id="start-over" class="hidden">Start Over</button>
-
-        <footer>
-            <p>Created by xxx</p>
-        </footer>
     </div>
 
 
