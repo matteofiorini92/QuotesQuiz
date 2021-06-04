@@ -257,12 +257,18 @@ footer p {
   }
 }
 
-.instructions {
+/* .instructions {
   margin-right: 10px;
-}
+} */
 
 #instructions-p {
-  text-align: right;
+  font-size: larger;
+  background: rgb(95, 97, 160);
+  /* width: auto; */
+  width: fit-content;
+  margin-right: 10px;
+  margin-left: auto;
+  padding: 5px;
 }
 /* from https://www.w3schools.com/howto/howto_css_modals.asp */
 /* The Modal (background) */

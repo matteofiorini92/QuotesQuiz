@@ -115,7 +115,7 @@ function bigApiRequest() {
     }
     quotesRequest.onload = function () {
         if (quotesRequest.status === 200) {
-            allQuotes = $.parseJSON(quotesRequest.responseText);
+            allQuotes = $.parseJSON(quotesRequest.responseText).docs;
 
             // once the request for all quotes is successful, get all authors
             let charactersRequest = new XMLHttpRequest();
@@ -125,7 +125,7 @@ function bigApiRequest() {
             }
             charactersRequest.onload = function () {
                 if (charactersRequest.status === 200) {
-                    allAuthors = $.parseJSON(charactersRequest.responseText);
+                    allAuthors = $.parseJSON(charactersRequest.responseText).docs;
                     // once the request for all authors is successful, call function that will hide initial elements
                     // and display those needed for the game
                     prepareForGame();
@@ -210,15 +210,21 @@ function getQuote() {
     switch (topic) {
 
         case 'lotr':
-            quoteId = Math.floor(Math.random() * allQuotes.docs.length);
-            quoteText = allQuotes.docs[quoteId].dialog;
+            quoteId = Math.floor(Math.random() * allQuotes.length);
+            quoteText = allQuotes[quoteId].dialog;
             $('.quote').html(quoteText);
-            let rightCharacterId = allQuotes.docs[quoteId].character;
+            let rightCharacterId = allQuotes[quoteId].character;
             getCharacters(rightCharacterId);
+            break;
+        case 'bb':
+            quoteId = Math.floor(Math.random() * allQuotes.length);
+            quoteText = allQuotes[quoteId].quote;
+            $('.quote').html(quoteText);
+            rightAuthorName = allQuotes[quoteId].author;
+            getCharacters(rightAuthorName);
             break;
         case 'got':
             //get quote
-
             quoteRequest.open('GET', 'https://got-quotes.herokuapp.com/quotes');
             quoteRequest.onload = function () {
                 if (quoteRequest.status === 200) {
@@ -233,7 +239,6 @@ function getQuote() {
             break;
         case 'friends':
             //get quote
-
             quoteRequest.open('GET', 'https://friends-quotes-api.herokuapp.com/quotes/random');
             quoteRequest.onload = function () {
                 if (quoteRequest.status === 200) {
@@ -246,14 +251,6 @@ function getQuote() {
             };
             quoteRequest.send();
             break;
-        case 'bb':
-            quoteId = Math.floor(Math.random() * allQuotes.length);
-            quoteText = allQuotes[quoteId].quote;
-            $('.quote').html(quoteText);
-            rightAuthorName = allQuotes[quoteId].author;
-            getCharacters(rightAuthorName);
-            break;
-
         default:
             alert('invalid choice', topic);
     }
@@ -264,77 +261,29 @@ function getCharacters(rightAuthor) {
     let names = [];
     let numberOfFakes = difficulty ? 2 : 4; // difficulty = true > easy game, only 2 fakes, else 4 fakes
     let fakeCharacterName = '';
-    switch (topic) {
 
-        case 'lotr':
-
-            // find name of right character
-
-            for (let i = 0; i < allAuthors.docs.length; i++) {
-                if (rightAuthor === allAuthors.docs[i]._id) {
-                    rightAuthorName = allAuthors.docs[i].name;
-                    break;
-                }
+    if (topic === 'lotr') {
+        // find name of right character
+        for (let i = 0; i < allAuthors.length; i++) {
+            if (rightAuthor === allAuthors[i]._id) {
+                rightAuthorName = allAuthors[i].name;
+                break;
             }
-            names.push(rightAuthorName);
-            //get names and ids of two fake characters
+        }
+    }
+    // add the right author to the array which will contain all 3 or 5 names
+    names.push(rightAuthorName);
 
-            for (let i = 0; i < numberOfFakes; i++) {
-                do {
-                    let rnd = Math.floor(Math.random() * allAuthors.docs.length);
-                    // var fakeCharacterId = allAuthors.docs[rnd]._id;
-                    fakeCharacterName = allAuthors.docs[rnd].name;
-                } while (names.includes(fakeCharacterName));
-                names.push(fakeCharacterName);
-            }
-
-            break;
-
-        case 'got':
-
-            // rightAuthorName = rightAuthor;
-            names.push(rightAuthorName);
-            for (let i = 0; i < numberOfFakes; i++) {
-                do {
-                    let rnd = Math.floor(Math.random() * allAuthors.length);
-                    // var fakeCharacterId = allAuthors.docs[rnd]._id;
-                    fakeCharacterName = allAuthors[rnd];
-                } while (names.includes(fakeCharacterName));
-                names.push(fakeCharacterName);
-            }
-            break;
-        case 'friends':
-
-            // rightAuthorName = rightAuthor;
-            names.push(rightAuthorName);
-            for (let i = 0; i < numberOfFakes; i++) {
-                do {
-                    let rnd = Math.floor(Math.random() * allAuthors.length);
-                    // var fakeCharacterId = allAuthors.docs[rnd]._id;
-                    fakeCharacterName = allAuthors[rnd];
-                } while (names.includes(fakeCharacterName));
-                names.push(fakeCharacterName);
-            }
-            break;
-
-        case 'bb':
-            names.push(rightAuthorName);
-            //get names and ids of two/four fake characters
-
-            for (let i = 0; i < numberOfFakes; i++) {
-                do {
-                    let rnd = Math.floor(Math.random() * allAuthors.length);
-                    // var fakeCharacterId = allAuthors.docs[rnd]._id;
-                    fakeCharacterName = allAuthors[rnd].name;
-                } while (names.includes(fakeCharacterName));
-                names.push(fakeCharacterName);
-            }
-            break;
-
-        default:
-            alert('invalid choice');
+    //get names of the fake characters and add them to the array too
+    for (let i = 0; i < numberOfFakes; i++) {
+        do {
+            let rnd = Math.floor(Math.random() * allAuthors.length);
+            fakeCharacterName = allAuthors[rnd].name;
+        } while (names.includes(fakeCharacterName));
+        names.push(fakeCharacterName);
     }
 
+    // shuffle the names and assign them to the buttons
     names = shuffle(names);
     document.getElementById('char-1').innerText = names[0];
     document.getElementById('char-2').innerText = names[1];
@@ -347,27 +296,37 @@ function getCharacters(rightAuthor) {
 
 }
 
-function updateProgression() {
+//https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
 
-    let currentProgression = parseInt(document.getElementById('progression').innerText);
-    currentProgression++;
-    document.getElementById('progression').innerText = currentProgression;
-    // https://css-tricks.com/updating-a-css-variable-with-javascript/
-    let progressionPercentage = (currentProgression / numberOfQuotes) * 100;
-    let root = document.documentElement;
-    root.style.setProperty('--progression-percentage', progressionPercentage + '%');
-    playGame();
+function shuffle(array) {
+    var currentIndex = array.length,
+        temporaryValue, randomIndex;
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+        // And swap it with the current element.
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+    }
+    return array;
 }
 
-$('.char-btn').click(function () {
-    if (rightAuthorName === this.innerText) {
+// event listener for when one of the characters is selected
 
+$('.char-btn').click(function () {
+    // rightAuthorName is a global variable
+    if (rightAuthorName === this.innerText) {
+        // if player guesses, the button clicked becomes green
         $(this).removeClass('btn-primary').addClass('right-answer');
         updateScore(5);
     } else {
-
+        // if player doesn't guess, the button clicked becomes red
         $(this).removeClass('btn-primary').addClass('wrong-answer');
         let characters = [document.getElementById('char-1').innerText, document.getElementById('char-2').innerText, document.getElementById('char-3').innerText, document.getElementById('char-4').innerText, document.getElementById('char-5').innerText];
+        // and the findRightAnswer function is called to find which button to mark in green
         switch (findRightAnswer(rightAuthorName, characters)) {
             case 0:
                 $('#char-1').removeClass('btn-primary').addClass('right-answer');
@@ -387,6 +346,7 @@ $('.char-btn').click(function () {
         }
         updateScore(-2);
     }
+    // after 1500px all buttons are reset to their original styling
     setTimeout(function () {
         $('#char-1').removeClass('right-answer').removeClass('wrong-answer').addClass('btn-primary');
         $('#char-2').removeClass('right-answer').removeClass('wrong-answer').addClass('btn-primary');
@@ -396,45 +356,9 @@ $('.char-btn').click(function () {
         updateProgression();
     }, 1500);
 
-
 });
 
-function findRightAnswer(rightAuthorName, characters) {
-    for (let i = 0; i < characters.length; i++) {
-        if (rightAuthorName === characters[i]) {
-            return i;
-            // break;
-        }
-    }
-}
-
-
-
-// common functions for all topics
-
-//https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
-
-function shuffle(array) {
-
-    var currentIndex = array.length,
-        temporaryValue, randomIndex;
-
-    // While there remain elements to shuffle...
-    while (0 !== currentIndex) {
-
-        // Pick a remaining element...
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex -= 1;
-
-        // And swap it with the current element.
-        temporaryValue = array[currentIndex];
-        array[currentIndex] = array[randomIndex];
-        array[randomIndex] = temporaryValue;
-    }
-
-    return array;
-}
-
+// add or substract points to the current score and sets the new score in the page
 function updateScore(points) {
     let score = $('#score');
     let currentScore = parseInt(score[0].innerText);
@@ -449,6 +373,30 @@ function updateScore(points) {
     }
 }
 
+// returns the position of the right answer
+function findRightAnswer(rightAuthorName, characters) {
+    for (let i = 0; i < characters.length; i++) {
+        if (rightAuthorName === characters[i]) {
+            return i;
+        }
+    }
+}
+
+// updates the progression bar, incrementing the number and the % of green over grey
+function updateProgression() {
+
+    let currentProgression = parseInt(document.getElementById('progression').innerText);
+    currentProgression++;
+    document.getElementById('progression').innerText = currentProgression;
+    // https://css-tricks.com/updating-a-css-variable-with-javascript/
+    let progressionPercentage = (currentProgression / numberOfQuotes) * 100;
+    let root = document.documentElement;
+    root.style.setProperty('--progression-percentage', progressionPercentage + '%');
+    playGame();
+}
+
+// this function is called after the last round
+// it generates a scoreboard made of 4 made up players with random scores, and the actual player
 
 function scoreboard(playerName, finalScore) {
     let players = [{
@@ -472,8 +420,10 @@ function scoreboard(playerName, finalScore) {
             score: finalScore
         }
     ];
-
+    // sort players based on their scores 
     players.sort(compare);
+
+    // and generates a table that's added to the dom
     //https://getbootstrap.com/docs/4.1/content/tables/
     let scoreboardHTML = `
     <table class="table table-hover table-dark">
@@ -499,16 +449,9 @@ function scoreboard(playerName, finalScore) {
 
     $('.scoreboard').removeClass('hidden');
     $('.start-over-button').removeClass('hidden');
-
-
 }
 
-$('#start-over').click(function () {
-    document.getElementById('progression').innerText = 1;
-    document.getElementById('score').innerText = 0;
-    start();
-});
-
+// generates a random score for the 4 made up players
 function getRandom() {
     let fakeScore = 0;
     for (let i = 0; i < numberOfQuotes; i++) {
@@ -532,3 +475,10 @@ function compare(a, b) {
     }
     return 0;
 }
+
+// when this button is clicked, the game resets and goes back to the initial version of the page
+$('#start-over').click(function () {
+    document.getElementById('progression').innerText = 1;
+    document.getElementById('score').innerText = 0;
+    start();
+});
