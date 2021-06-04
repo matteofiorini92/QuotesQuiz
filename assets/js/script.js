@@ -1,3 +1,5 @@
+// Declaring globla variables
+
 let allQuotes = "";
 let allAuthors = "";
 let rightAuthorName = "";
@@ -13,29 +15,28 @@ $('document').ready(start);
 // from https://www.w3schools.com/howto/howto_css_modals.asp
 // Get the modal
 var modal = document.getElementById("myModal");
-
-// Get the button that opens the modal
 var paragraph = document.getElementById("instructions-p");
-
-// Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks the button, open the modal 
-paragraph.onclick = function() {
-  modal.style.display = "block";
+paragraph.onclick = function () {
+    modal.style.display = "block";
 }
 
 // When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
+span.onclick = function () {
+    modal.style.display = "none";
 }
 
 // When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
+window.onclick = function (event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
 }
+
+// The start funcion is called when the page is initially loaded and at the end of each game (after the scoreboard).
+// Its purpose is to display the initial "form" for the player to start a new game
 
 function start() {
     document.getElementById('logo').style.height = "200px";
@@ -49,10 +50,13 @@ function start() {
     }
     $('#quotes').html(options);
 
+    // the start button checks if the name of the player was entered, if so the game starts.
     $('#start-btn').click(
         function (e) {
-//https://stackoverflow.com/a/24564826
+            // to avoid the click of the button to "fire" twice, used stopImmediatePropagation as per https://stackoverflow.com/a/24564826
             e.stopImmediatePropagation();
+
+            // get all the values chosen by the player
             playerName = document.getElementById('player-name').value;
             numberOfQuotes = document.getElementById('quotes').value;
             topic = document.getElementById('topic').value;
@@ -61,44 +65,128 @@ function start() {
                 alert("Come on, you must have a name!");
             } else {
                 document.getElementById('logo').style.height = "125px";
+
+                // set the progression percentage for the progression bar
                 // https://css-tricks.com/updating-a-css-variable-with-javascript/
                 let progressionPercentage = (1 / numberOfQuotes) * 100;
                 let root = document.documentElement;
                 root.style.setProperty('--progression-percentage', progressionPercentage + '%');
 
+                // lotr and bb share the same logic
+                // got and friends share the same logic
+
                 switch (topic) {
                     case 'lotr':
-                        lotr();
+                    case 'bb':
+                        bigApiRequest();
                         break;
                     case 'got':
-                        got();
-                        break;
                     case 'friends':
-                        friends();
-                        break;
-                    case 'bb':
-                        breakingBad();
+                        smallApi();
                         break;
                     default:
                         alert('invalid category');
                 }
             }
-            // return false;
         }
     );
+}
 
+// LOTR (Lord Of The Rings) AND BB (Breaking Bad) have similar structures
+// These apis don't allow to retrieve a random quote, hence retrieving all quotes is necessary
+// This api contains a lot of different characters, hence retrieving all characters with an api call is necessary
+
+function bigApiRequest() {
+    let quotesUrl = '';
+    let charactersUrl = '';
+    if (topic === 'lotr') {
+        quotesUrl = 'https://the-one-api.dev/v2/quote/';
+        charactersUrl = 'https://the-one-api.dev/v2/character/';
+    } else if (topic === 'bb') {
+        quotesUrl = 'https://breakingbadapi.com/api/quotes';
+        charactersUrl = 'https://breakingbadapi.com/api/characters';
+    }
+
+    // get all quotes
+    let quotesRequest = new XMLHttpRequest();
+    quotesRequest.open('GET', quotesUrl);
+    if (topic === 'lotr') {
+        quotesRequest.setRequestHeader('Authorization', 'Bearer TLVn4EUDXxn5E9lePgAT');
+    }
+    quotesRequest.onload = function () {
+        if (quotesRequest.status === 200) {
+            allQuotes = $.parseJSON(quotesRequest.responseText);
+
+            // once the request for all quotes is successful, get all authors
+            let charactersRequest = new XMLHttpRequest();
+            charactersRequest.open('GET', charactersUrl);
+            if (topic === 'lotr') {
+                charactersRequest.setRequestHeader('Authorization', 'Bearer TLVn4EUDXxn5E9lePgAT');
+            }
+            charactersRequest.onload = function () {
+                if (charactersRequest.status === 200) {
+                    allAuthors = $.parseJSON(charactersRequest.responseText);
+                    // once the request for all authors is successful, call function that will hide initial elements
+                    // and display those needed for the game
+                    prepareForGame();
+                }
+            };
+            charactersRequest.onerror = function (e) {
+                alert(e.statusText);
+            };
+            charactersRequest.send();
+        }
+    };
+    quotesRequest.onerror = function (e) {
+        alert(e.statusText);
+    };
+    quotesRequest.send();
 
 }
 
+// GOT (Game Of Thrones) AND FRIENDS have similar structures
+// These apis allow to retrieve a random quote.
+// Quotes contain the name of the character.
+// These apis contain just few different characters.
+
+function smallApi() {
+    if (topic === 'got') {
+        allAuthors = ["Bronn", "Brynden Tully", "Cersei", "The Hound", "Jaime Lannister", "Littlefinger", "Olenna Tyrell", "Renly Baratheon", "Tyrion", "Varys"];
+    } else if (topic === 'friends') {
+        allAuthors = ["Rachel", "Joey", "Ross", "Monica", "Chandler", "Phoebe"];
+    }
+    prepareForGame();
+}
+
+function prepareForGame() {
+    // once all quotes and all characters are loaded, start game
+    // hide all items from initial form
+    $('.player').addClass('hidden');
+    // display quotes, characters, progression area and points
+    $('.quote').removeClass('hidden');
+    if (difficulty) {
+        $('.characters').removeClass('hidden');
+    } else {
+        $('.characters').removeClass('hidden');
+        $('.characters-hard').removeClass('hidden');
+    }
+    $('.score-area').removeClass('hidden');
+    $('.progression-area').removeClass('hidden');
+    document.getElementById('number-of-quotes').innerText = numberOfQuotes;
+    playGame();
+}
+
+// The playGame function checks if we are at the end of the game or not
 
 function playGame() {
     let checkProgression = parseInt(document.getElementById('progression').innerText);
     let numberOfQuotes = parseInt(document.getElementById('number-of-quotes').innerText);
+    // if there are still rounds to play, get a new quote
     if (checkProgression <= numberOfQuotes) {
         getQuote();
     } else {
+        // otherwise get the final score and hide all playing elements
         let finalScore = parseInt(document.getElementById('score').innerText);
-        // $('.quote')[0].empty;
         document.getElementsByClassName('quote')[0].innerText = "";
         $('#char-1').html = "";
         $('#char-2').html = "";
@@ -111,9 +199,8 @@ function playGame() {
         $('.score-area').addClass('hidden');
         $('.progression-area').addClass('hidden');
 
+        // and move to the scoreboard
         scoreboard(playerName, finalScore);
-        // $('.scoreboard').removeClass('hidden');
-        // $('.scoreboard').html(`<p>Congratulations! Your final score is ${finalScore} </p>`);
     }
 }
 
@@ -444,135 +531,4 @@ function compare(a, b) {
         return 1;
     }
     return 0;
-}
-
-// SPECIFIC -- LOTR
-
-function lotr() {
-    // get all quotes
-
-    let quotesRequest = new XMLHttpRequest();
-    quotesRequest.open('GET', 'https://the-one-api.dev/v2/quote/');
-    quotesRequest.setRequestHeader('Authorization', 'Bearer TLVn4EUDXxn5E9lePgAT');
-    quotesRequest.onload = function () {
-        if (quotesRequest.status === 200) {
-            allQuotes = $.parseJSON(quotesRequest.responseText);
-
-            // get all authors
-
-            let charactersRequest = new XMLHttpRequest();
-            charactersRequest.open('GET', 'https://the-one-api.dev/v2/character/');
-            charactersRequest.setRequestHeader('Authorization', 'Bearer TLVn4EUDXxn5E9lePgAT');
-
-            charactersRequest.onload = function () {
-                if (charactersRequest.status === 200) {
-                    allAuthors = $.parseJSON(charactersRequest.responseText);
-                    // once all quotes and all characters are loaded, start game
-                    $('.player').addClass('hidden');
-                    $('.quote').removeClass('hidden');
-                    if (difficulty) {
-                        $('.characters').removeClass('hidden');
-                        // $('.btn-container').addClass('col-12 col-md-3');
-                    } else {
-                        $('.characters').removeClass('hidden');
-                        $('.characters-hard').removeClass('hidden');
-                        // $('.btn-container').addClass('col-12 col-md-3');
-                        // $('.btn-container-hard').addClass('col-12 col-md-4');
-                    }
-                    $('.score-area').removeClass('hidden');
-                    $('.progression-area').removeClass('hidden');
-                    document.getElementById('number-of-quotes').innerText = numberOfQuotes;
-                    playGame();
-                }
-            };
-            charactersRequest.onerror = function (e) {
-                alert(e.statusText);
-            };
-            charactersRequest.send();
-        }
-    };
-    quotesRequest.onerror = function (e) {
-        alert(e.statusText);
-    };
-    quotesRequest.send();
-}
-
-// SPECIFIC -- GOT
-
-function got() {
-    allAuthors = ["Bronn", "Brynden Tully", "Cersei", "The Hound", "Jaime Lannister", "Littlefinger", "Olenna Tyrell", "Renly Baratheon", "Tyrion", "Varys"];
-    $('.player').addClass('hidden');
-    $('.quote').removeClass('hidden');
-    $('.characters').removeClass('hidden');
-    if (!difficulty) {
-        $('.characters-hard').removeClass('hidden');
-    }
-    $('.score-area').removeClass('hidden');
-    $('.progression-area').removeClass('hidden');
-    document.getElementById('number-of-quotes').innerText = numberOfQuotes;
-    playGame();
-}
-
-// SPECIFIC FRIENDS
-
-function friends() {
-    allAuthors = ["Rachel", "Joey", "Ross", "Monica", "Chandler", "Phoebe"];
-    $('.player').addClass('hidden');
-    $('.quote').removeClass('hidden');
-    $('.characters').removeClass('hidden');
-    if (!difficulty) {
-        $('.characters-hard').removeClass('hidden');
-    }
-    $('.score-area').removeClass('hidden');
-    $('.progression-area').removeClass('hidden');
-    document.getElementById('number-of-quotes').innerText = numberOfQuotes;
-    playGame();
-}
-
-// SPECIFIC BREAKING BAD
-
-function breakingBad() {
-    // get all quotes
-
-    let quotesRequest = new XMLHttpRequest();
-    quotesRequest.open('GET', 'https://breakingbadapi.com/api/quotes');
-    quotesRequest.onload = function () {
-        if (quotesRequest.status === 200) {
-            allQuotes = $.parseJSON(quotesRequest.responseText);
-
-            // get all authors
-
-            let charactersRequest = new XMLHttpRequest();
-            charactersRequest.open('GET', 'https://breakingbadapi.com/api/characters');
-            charactersRequest.onload = function () {
-                if (charactersRequest.status === 200) {
-                    allAuthors = $.parseJSON(charactersRequest.responseText);
-                    // once all quotes and all characters are loaded, start game
-                    $('.player').addClass('hidden');
-                    $('.quote').removeClass('hidden');
-                    if (difficulty) {
-                        $('.characters').removeClass('hidden');
-                        // $('.btn-container').addClass('col-12 col-md-3');
-                    } else {
-                        $('.characters').removeClass('hidden');
-                        $('.characters-hard').removeClass('hidden');
-                        // $('.btn-container').addClass('col-12 col-md-3');
-                        // $('.btn-container-hard').addClass('col-12 col-md-4');
-                    }
-                    $('.score-area').removeClass('hidden');
-                    $('.progression-area').removeClass('hidden');
-                    document.getElementById('number-of-quotes').innerText = numberOfQuotes;
-                    playGame();
-                }
-            };
-            charactersRequest.onerror = function (e) {
-                alert(e.statusText);
-            };
-            charactersRequest.send();
-        }
-    };
-    quotesRequest.onerror = function (e) {
-        alert(e.statusText);
-    };
-    quotesRequest.send();
 }
