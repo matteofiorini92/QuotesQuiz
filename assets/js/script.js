@@ -1,7 +1,7 @@
 let allQuotes = "";
 let allAuthors = "";
-var rightAuthorName = "";
-var playerName;
+let rightAuthorName = "";
+let playerName;
 let topic = "";
 let difficulty = "";
 let numberOfQuotes = "";
@@ -112,7 +112,7 @@ function getQuote() {
                     rightAuthorName = quote.character;
                     getCharacters(rightAuthorName);
                 }
-            }
+            };
             quoteRequest.send();
             break;
         case 'friends':
@@ -127,7 +127,7 @@ function getQuote() {
                     rightAuthorName = quote.character;
                     getCharacters(rightAuthorName);
                 }
-            }
+            };
             quoteRequest.send();
             break;
         case 'bb':
@@ -146,7 +146,8 @@ function getQuote() {
 
 function getCharacters(rightAuthor) {
     let names = [];
-    let numberOfFakes = difficulty ? 2 : 4 // difficulty = true > easy game, only 2 fakes, else 4 fakes
+    let numberOfFakes = difficulty ? 2 : 4; // difficulty = true > easy game, only 2 fakes, else 4 fakes
+    let fakeCharacterName = '';
     switch (topic) {
 
         case 'lotr':
@@ -166,7 +167,7 @@ function getCharacters(rightAuthor) {
                 do {
                     let rnd = Math.floor(Math.random() * allAuthors.docs.length);
                     // var fakeCharacterId = allAuthors.docs[rnd]._id;
-                    var fakeCharacterName = allAuthors.docs[rnd].name;
+                    fakeCharacterName = allAuthors.docs[rnd].name;
                 } while (names.includes(fakeCharacterName));
                 names.push(fakeCharacterName);
             }
@@ -181,7 +182,7 @@ function getCharacters(rightAuthor) {
                 do {
                     let rnd = Math.floor(Math.random() * allAuthors.length);
                     // var fakeCharacterId = allAuthors.docs[rnd]._id;
-                    var fakeCharacterName = allAuthors[rnd];
+                    fakeCharacterName = allAuthors[rnd];
                 } while (names.includes(fakeCharacterName));
                 names.push(fakeCharacterName);
             }
@@ -194,7 +195,7 @@ function getCharacters(rightAuthor) {
                 do {
                     let rnd = Math.floor(Math.random() * allAuthors.length);
                     // var fakeCharacterId = allAuthors.docs[rnd]._id;
-                    var fakeCharacterName = allAuthors[rnd];
+                    fakeCharacterName = allAuthors[rnd];
                 } while (names.includes(fakeCharacterName));
                 names.push(fakeCharacterName);
             }
@@ -208,7 +209,7 @@ function getCharacters(rightAuthor) {
                 do {
                     let rnd = Math.floor(Math.random() * allAuthors.length);
                     // var fakeCharacterId = allAuthors.docs[rnd]._id;
-                    var fakeCharacterName = allAuthors[rnd].name;
+                    fakeCharacterName = allAuthors[rnd].name;
                 } while (names.includes(fakeCharacterName));
                 names.push(fakeCharacterName);
             }
@@ -286,7 +287,7 @@ function findRightAnswer(rightAuthorName, characters) {
     for (let i = 0; i < characters.length; i++) {
         if (rightAuthorName === characters[i]) {
             return i;
-            break;
+            // break;
         }
     }
 }
@@ -404,9 +405,9 @@ function getRandom() {
     for (let i = 0; i < numberOfQuotes; i++) {
         let rnd = Math.floor(Math.random() * 2); //gets random number that is either 0 or 1
         if (rnd === 0) {
-            fakeScore += -2
+            fakeScore += -2;
         } else {
-            fakeScore += 5
+            fakeScore += 5;
         }
     }
     return fakeScore;
@@ -461,16 +462,16 @@ function lotr() {
                     document.getElementById('number-of-quotes').innerText = numberOfQuotes;
                     playGame();
                 }
-            }
+            };
             charactersRequest.onerror = function (e) {
-                console.error(e.statusText)
-            }
+                console.error(e.statusText);
+            };
             charactersRequest.send();
         }
-    }
+    };
     quotesRequest.onerror = function (e) {
         console.error(e.statusText);
-    }
+    };
     quotesRequest.send();
 }
 
@@ -541,15 +542,15 @@ function breakingBad() {
                     document.getElementById('number-of-quotes').innerText = numberOfQuotes;
                     playGame();
                 }
-            }
+            };
             charactersRequest.onerror = function (e) {
-                console.error(e.statusText)
-            }
+                console.error(e.statusText);
+            };
             charactersRequest.send();
         }
-    }
+    };
     quotesRequest.onerror = function (e) {
         console.error(e.statusText);
-    }
+    };
     quotesRequest.send();
 }
