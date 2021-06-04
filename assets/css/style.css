@@ -106,11 +106,6 @@ header {
   transform: scale(1, 1);
 }
 
-/* .btn {
-  text-align: center;
-  cursor: pointer;
-} */
-
 .char-btn {
   width: 200px;
   height: 50px;
@@ -126,14 +121,15 @@ header {
   font-size: xx-large;
   font-style: italic;
   margin-bottom: 40px;
+  font-weight: 800;
 }
 
 
 #start-btn {
-  margin-top: 50px;
+  margin-top: 20px;
   width: 200px;
   font-size: xx-large;
-  background-color: rgb(100 167 255);
+  background-color: rgb(48, 48, 111);
   ;
 }
 
@@ -150,7 +146,7 @@ header {
 } */
 
 .form-field {
-  background: rgb(100 167 255);
+  background: rgb(100, 167, 255);
   padding: 12px;
   margin-bottom: 12px;
   text-align: -webkit-center;
@@ -252,4 +248,62 @@ footer p {
 
 .btn-container, .btn-container-hard {
   margin-top: 15px;
+}
+
+@media screen and (max-width: 480px) {
+  .layer {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+.instructions {
+  margin-right: 10px;
+}
+
+#instructions-p {
+  text-align: right;
+}
+/* from https://www.w3schools.com/howto/howto_css_modals.asp */
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: rgb(100, 167, 255);
+  margin: auto;
+  padding: 20px;
+  border: 1px solid rgb(13, 42, 80);
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: rgb(13, 42, 80);
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.progression-area {
+  margin: auto;
 }

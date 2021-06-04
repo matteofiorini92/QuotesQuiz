@@ -1,6 +1,6 @@
 # QuotesQuiz
 
-![home page all screen sizes](https://raw.githubusercontent.com/matteofiorini92/LittleFlowers-Spa/main/assets/img/wireframes/readme-different-viewports.png)
+![home page all screen sizes](https://raw.githubusercontent.com/matteofiorini92/QuotesQuiz/master/assets/img/wireframes/readme-different-viewports.png)
 
 [Link to deployed website](https://matteofiorini92.github.io/QuotesQuiz/)
 
@@ -82,14 +82,19 @@ The font will be Ubuntu.
 ## Technologies Used
 
 - [Balsamiq](https://balsamiq.com/) for the wireframes of this readme.md file
-- [Bootstrap](https://getbootstrap.com/) to use the grid system, pre-formatted buttons in xxx
-- [Animate.css](https://animate.style/) for xxx
-- [FontAwesome](https://fontawesome.com/) for icons
+- [Bootstrap](https://getbootstrap.com/) to use the grid system, pre-formatted buttons and the scoreboard table
+<!-- - [Animate.css](https://animate.style/) for xxx -->
+<!-- - [FontAwesome](https://fontawesome.com/) for icons -->
 - [Google Fonts](https://fonts.google.com/) for fonts
-- [Hover.css](http://ianlunn.github.io/Hover/) for xxx
-- [JavaScript](https://code.jquery.com/)
-...APIs...
+<!-- - [Hover.css](http://ianlunn.github.io/Hover/) for xxx -->
+- [JQuery](https://code.jquery.com/)
 - [FreeLogoDesign](https://www.freelogodesign.org/) to design the logo
+- [Canva](https://www.canva.com/) to create the background image
+- [TinyPng](https://tinypng.com/) to reduce the size of the background
+- [Friends API](https://friends-quotes-api.herokuapp.com/)
+- [Lord Of The Rings API](https://the-one-api.dev/)
+- [Game of Thrones API](https://github.com/wsizoo/game-of-thrones-quotes)
+- [Breaking Bad API](https://breakingbadapi.com/)
 
 ## Testing
 
@@ -104,19 +109,19 @@ User story 1:
 xxx
 
 
-The Google Chrome Lighthouse feature was used on xxx
-Results can be seen here:
-- [Home Page](xxx)
+The Google Chrome Lighthouse reports for Desktop and Mobile:
+- ![Desktop](https://raw.githubusercontent.com/matteofiorini92/QuotesQuiz/master/assets/img/lighthouse/lighthouse-desktop.png)
+- ![Mobile](https://raw.githubusercontent.com/matteofiorini92/QuotesQuiz/master/assets/img/lighthouse/lighthouse-mobile.png)
 
 
 I used the following validators to check my HTML and CSS code:
 
 [HTML Validator](https://validator.w3.org/)
-- [Home Page](xxx)
+- [Home Page](https://validator.w3.org/nu/?doc=https%3A%2F%2Fmatteofiorini92.github.io%2FQuotesQuiz%2F)
 
 [CSS Validator](https://jigsaw.w3.org/css-validator/)
 
-[style.css file](https://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fmatteofiorini92.github.io%2FQuotesQuiz%2Fassets%2Fcss%2Fstyle.css&profile=css3svg&usermedium=all&warning=1&vextwarning=&lang=en)
+- [style.css file](https://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fmatteofiorini92.github.io%2FQuotesQuiz%2Fassets%2Fcss%2Fstyle.css&profile=css3svg&usermedium=all&warning=1&vextwarning=&lang=en)
 <p>
     <a href="https://jigsaw.w3.org/css-validator/check/referer">
         <img style="border:0;width:88px;height:31px"
@@ -145,6 +150,7 @@ I used the following validators to check my HTML and CSS code:
     - switch paths to relative
 - Click of Start Game button firing multiple times
     - fixed by adding e.stopImmediatePropagation() to the event listener as suggested in [this](https://stackoverflow.com/a/24564826) StackOverflow thread.
+- The friends API is slow to respond the first time: a loading icon should be added while waiting for the response.
             
 
 ## Deployment
@@ -159,7 +165,7 @@ To deploy to GitHub Pages from its GitHub repository, the following steps were t
 2. From the list of repositories on the screen, select **matteofiorini92/QuotesQuiz**
 3. From the menu items near the top of the page, select **Settings**
 4. Scroll down to the **GitHub Pages** section
-5. Under **Source** click the drop-down menu labelled **None** and select **main**
+5. Under **Source** click the drop-down menu labelled **None** and select **master**
 6. In the **folder** drop-down, the **/root** folder is automatically selected
 7. Click on **Save**
 8. The project is now deployed and the URL of the website is available in the GitHub Pages section

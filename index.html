@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-    <script src="https://kit.fontawesome.com/862a408407.js" crossorigin="anonymous"></script>
+    <!-- <script src="https://kit.fontawesome.com/862a408407.js" crossorigin="anonymous"></script> -->
     <link rel="stylesheet" href="assets/css/style.css">
     <!-- https://gitbrent.github.io/bootstrap4-toggle/ -->
     <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
@@ -22,10 +22,28 @@
         <div class="layer">
             <header>
                 <!-- <h1>QuotesQuiz</h1> -->
-                <img alt="logo" src="assets/img/logo.png">
+                <img id="logo" alt="logo" src="assets/img/logo.png">
             </header>
 
             <!-- main section -->
+            <div class="instructions">
+                <p id="instructions-p">How to play?</p>
+                <!-- from https://www.w3schools.com/howto/howto_css_modals.asp -->
+                <div id="myModal" class="modal">
+                    <!-- Modal content -->
+                    <div class="modal-content">
+                        <span class="close">&times;</span>
+                        <ol>
+                            <li>The game is simple: read the quote and guess who said it.</li>
+                            <li>Choose how many questions you want to answer (1 - 15)</li>
+                            <li>Select the Topic you want to be challenged on</li>
+                            <li>Do you want to play the easy (3 characters) or hard (5 characters) way?</li>
+                            <li>You get 5 points for each correct answer, and lose 2 when you are wrong.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
 
             <section class="player">
                 <div class="container">
@@ -53,10 +71,11 @@
                         <div class="col-8 col-sm-6 form-field">
                             <label for="topic" class="start-title">Topic</label>
                             <select name="topic" id="topic" class="form-select">
-                                <option value="friends">Friends</option>
-                                <option value="lotr">Lord Of The Rings</option>
                                 <option value="got">Game Of Thrones</option>
                                 <option value="bb">Breaking Bad</option>
+                                <option value="friends">Friends</option>
+                                <option value="lotr">Lord Of The Rings</option>
+
                             </select>
                         </div>
                     </div>
@@ -64,18 +83,13 @@
                         <div class="col-2 col-sm-3"></div>
                         <div class="col-8 col-sm-6 form-field">
                             <label for="difficulty" class="start-title">Difficulty</label>
-                            <!-- https://gitbrent.github.io/bootstrap4-toggle/ -->
-                            <input type="checkbox" checked data-toggle="toggle" data-on="Easy" data-off="Hard"
-                                data-onstyle="primary" data-offstyle="dark" id="difficulty">
+                            <div>
+                                <!-- https://gitbrent.github.io/bootstrap4-toggle/ -->
+                                <input type="checkbox" checked data-toggle="toggle" data-on="Easy" data-off="Hard"
+                                    data-onstyle="primary" data-offstyle="dark" id="difficulty">
+                            </div>
                         </div>
                     </div>
-                    <!-- <div class="row">
-                        <div class="col-2 col-sm-3"></div> 
-                        <div class="col-8 col-sm-6 enter-container">
-                            <button type="submit" id="start-btn" class="btn btn-ripple-out">Enter</button>
-                        </div>
-                    </div>
-                    -->
                     <div class="enter-container">
                         <button type="submit" id="start-btn" class="btn btn-ripple-out">Enter</button>
                     </div>
@@ -117,9 +131,8 @@
                         <span id="score" class="positive-score">0</span> Points
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-2 col-sm-3"></div>
-                    <div class="col-8 col-sm-6 w3-light-grey progression-area hidden">
+                <div class="progression-container">
+                    <div class="w3-light-grey progression-area hidden">
                         <div class="w3-container w3-green w3-center" id="progression-bar">
                             <span id="progression">1</span>/<span id="number-of-quotes">0</span>
                         </div>
