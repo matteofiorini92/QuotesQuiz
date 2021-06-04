@@ -15,7 +15,7 @@ body {
 }
 
 .background {
-  background-image: url("../img/background-3.png");
+  background-image: url("../img/background.png");
   background-size: 100% auto;
   min-height: 100vh;
 }
@@ -42,7 +42,7 @@ h1 {
 .right-answer {
   background-color: rgb(0, 59, 0);
   color: #FFF;
-  background-image: url("/assets/img/right.png");
+  background-image: url("../img/right.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -52,7 +52,7 @@ h1 {
 .wrong-answer {
   background-color: rgb(80, 0, 0);
   color: #FFF;
-  background-image: url("/assets/img/wrong.png");
+  background-image: url("../img/wrong.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
