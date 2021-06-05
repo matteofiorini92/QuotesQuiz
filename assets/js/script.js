@@ -21,19 +21,19 @@ var span = document.getElementsByClassName("close")[0];
 // When the user clicks the button, open the modal 
 paragraph.onclick = function () {
     modal.style.display = "block";
-}
+};
 
 // When the user clicks on <span> (x), close the modal
 span.onclick = function () {
     modal.style.display = "none";
-}
+};
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function (event) {
     if (event.target == modal) {
         modal.style.display = "none";
     }
-}
+};
 
 // The start funcion is called when the page is initially loaded and at the end of each game (after the scoreboard).
 // Its purpose is to display the initial "form" for the player to start a new game
@@ -115,7 +115,12 @@ function bigApiRequest() {
     }
     quotesRequest.onload = function () {
         if (quotesRequest.status === 200) {
-            allQuotes = $.parseJSON(quotesRequest.responseText).docs;
+            if (topic === 'lotr') {
+                allQuotes = $.parseJSON(quotesRequest.responseText).docs;
+            }
+            else if (topic === 'bb') {
+                allQuotes = $.parseJSON(quotesRequest.responseText);
+            }
 
             // once the request for all quotes is successful, get all authors
             let charactersRequest = new XMLHttpRequest();
@@ -125,7 +130,12 @@ function bigApiRequest() {
             }
             charactersRequest.onload = function () {
                 if (charactersRequest.status === 200) {
-                    allAuthors = $.parseJSON(charactersRequest.responseText).docs;
+                    if (topic === 'lotr') {
+                        allAuthors = $.parseJSON(charactersRequest.responseText).docs;
+                    }
+                    else if (topic === 'bb') {
+                        allAuthors = $.parseJSON(charactersRequest.responseText);
+                    }
                     // once the request for all authors is successful, call function that will hide initial elements
                     // and display those needed for the game
                     prepareForGame();
@@ -207,6 +217,7 @@ function playGame() {
 function getQuote() {
     let quoteId = "";
     let quoteRequest = new XMLHttpRequest();
+    console.log(allQuotes);
     switch (topic) {
 
         case 'lotr':

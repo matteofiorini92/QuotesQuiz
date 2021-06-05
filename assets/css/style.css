@@ -19,6 +19,8 @@ body {
   background-size: 100% auto;
   min-height: 100vh;
 }
+
+/* light blue layer */
 /*https://stackoverflow.com/questions/9182978/semi-transparent-color-layer-over-background-image*/
 .layer {
   background-color: rgba(30, 101, 183, 0.8);
@@ -29,16 +31,20 @@ body {
   min-height: 100vh;
 }
 
-h1 {
-  text-align: center;
-  margin-top: 20px;
-  margin-bottom: 50px;
+/* full width layer for small screens */
+@media screen and (max-width: 480px) {
+  .layer {
+    width: 100%;
+    margin-left: 0;
+  }
 }
 
+/* class used to hide/display elements in script.js */
 .hidden {
   display: none;
 }
 
+/* used to show which one is the right answer */
 .right-answer {
   background-color: rgb(0, 59, 0);
   color: #FFF;
@@ -49,6 +55,7 @@ h1 {
   font-weight: bold;
 }
 
+/* used when the player selects the wrong answer */
 .wrong-answer {
   background-color: rgb(80, 0, 0);
   color: #FFF;
@@ -124,7 +131,6 @@ header {
   font-weight: 800;
 }
 
-
 #start-btn {
   margin-top: 20px;
   width: 200px;
@@ -140,10 +146,6 @@ header {
 .player {
   text-align: center;
 }
-
-/* .row {
-  padding-top: 20px;
-} */
 
 .form-field {
   background: rgb(100, 167, 255);
@@ -250,21 +252,9 @@ footer p {
   margin-top: 15px;
 }
 
-@media screen and (max-width: 480px) {
-  .layer {
-    width: 100%;
-    margin-left: 0;
-  }
-}
-
-/* .instructions {
-  margin-right: 10px;
-} */
-
 #instructions-p {
   font-size: larger;
   background: rgb(95, 97, 160);
-  /* width: auto; */
   width: fit-content;
   margin-right: 10px;
   margin-left: auto;

@@ -199,7 +199,6 @@ To work on the project code within a local IDE such as VSCode, Pycharm etc:
 ## Credits
 
 
-
 ### Acknowledgements
 
 The content of the deployment section of this readme.md was mostly taken from [this webinar](https://www.youtube.com/watch?v=7BteidgLAyM).
