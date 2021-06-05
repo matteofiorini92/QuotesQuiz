@@ -117,8 +117,7 @@ function bigApiRequest() {
         if (quotesRequest.status === 200) {
             if (topic === 'lotr') {
                 allQuotes = $.parseJSON(quotesRequest.responseText).docs;
-            }
-            else if (topic === 'bb') {
+            } else if (topic === 'bb') {
                 allQuotes = $.parseJSON(quotesRequest.responseText);
             }
 
@@ -132,8 +131,7 @@ function bigApiRequest() {
                 if (charactersRequest.status === 200) {
                     if (topic === 'lotr') {
                         allAuthors = $.parseJSON(charactersRequest.responseText).docs;
-                    }
-                    else if (topic === 'bb') {
+                    } else if (topic === 'bb') {
                         allAuthors = $.parseJSON(charactersRequest.responseText);
                     }
                     // once the request for all authors is successful, call function that will hide initial elements
@@ -161,9 +159,57 @@ function bigApiRequest() {
 
 function smallApi() {
     if (topic === 'got') {
-        allAuthors = ["Bronn", "Brynden Tully", "Cersei", "The Hound", "Jaime Lannister", "Littlefinger", "Olenna Tyrell", "Renly Baratheon", "Tyrion", "Varys"];
+        allAuthors = [{
+                name: "Bronn"
+            },
+            {
+                name: "Brynden Tully"
+            },
+            {
+                name: "Cersei"
+            },
+            {
+                name: "The Hound"
+            },
+            {
+                name: "Jaime Lannister"
+            },
+            {
+                name: "Littlefinger"
+            },
+            {
+                name: "Olenna Tyrell"
+            },
+            {
+                name: "Renly Baratheon"
+            },
+            {
+                name: "Tyrion"
+            },
+            {
+                name: "Varys"
+            }
+        ];
     } else if (topic === 'friends') {
-        allAuthors = ["Rachel", "Joey", "Ross", "Monica", "Chandler", "Phoebe"];
+        allAuthors = [{
+                name: "Rachel"
+            },
+            {
+                name: "Joey"
+            },
+            {
+                name: "Ross"
+            },
+            {
+                name: "Monica"
+            },
+            {
+                name: "Chandler"
+            },
+            {
+                name: "Phoebe"
+            }
+        ];
     }
     prepareForGame();
 }
@@ -217,7 +263,7 @@ function playGame() {
 function getQuote() {
     let quoteId = "";
     let quoteRequest = new XMLHttpRequest();
-    console.log(allQuotes);
+    let quote = '';
     switch (topic) {
 
         case 'lotr':
@@ -241,11 +287,11 @@ function getQuote() {
                 if (quoteRequest.status === 200) {
                     quote = $.parseJSON(quoteRequest.responseText);
                     quoteText = quote.quote;
-                    $('.quote').html(quoteText);
+                    $('.quote').text(quoteText);
                     rightAuthorName = quote.character;
                     getCharacters(rightAuthorName);
                 }
-            };
+            }
             quoteRequest.send();
             break;
         case 'friends':
@@ -259,7 +305,7 @@ function getQuote() {
                     rightAuthorName = quote.character;
                     getCharacters(rightAuthorName);
                 }
-            };
+            }
             quoteRequest.send();
             break;
         default:
@@ -272,7 +318,6 @@ function getCharacters(rightAuthor) {
     let names = [];
     let numberOfFakes = difficulty ? 2 : 4; // difficulty = true > easy game, only 2 fakes, else 4 fakes
     let fakeCharacterName = '';
-
     if (topic === 'lotr') {
         // find name of right character
         for (let i = 0; i < allAuthors.length; i++) {
@@ -284,7 +329,6 @@ function getCharacters(rightAuthor) {
     }
     // add the right author to the array which will contain all 3 or 5 names
     names.push(rightAuthorName);
-
     //get names of the fake characters and add them to the array too
     for (let i = 0; i < numberOfFakes; i++) {
         do {
@@ -293,7 +337,6 @@ function getCharacters(rightAuthor) {
         } while (names.includes(fakeCharacterName));
         names.push(fakeCharacterName);
     }
-
     // shuffle the names and assign them to the buttons
     names = shuffle(names);
     document.getElementById('char-1').innerText = names[0];
