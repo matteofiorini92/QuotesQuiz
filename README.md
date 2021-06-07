@@ -26,11 +26,11 @@ QuotesQuiz is an online game. The player is presented with a quote and needs to 
 
 ### User Stories
 
-The goal of this game is guess who said a specific quote. Quotes will be divided into categories.
-At the beginning of the game, the player will chose the category, game difficulty and number of quotes.
+The goal of this game is to guess who said a specific quote. Quotes will be divided into categories.
+At the beginning of the game, the player will choose the category, game difficulty and number of quotes.
 For each right answer, the player will gain points, while when the answer is wrong, they will lose points.
 
-- User story 1: I want to prove myself how well I know a specific subject (movies, books, etc.).
+- User story 1: I want to prove to myself how well I know a specific subject (movies, books, etc.).
 - User story 2: I want to challenge my friends on who knows a particular topic the best
 
 ### The Scope Plane
@@ -40,7 +40,7 @@ Users want to have fun playing a game that will challenge their knowledge on a s
 
 ### The Structure Plane
 
-The website will have only one page. The content of the page will change base on the user's choices.
+The website will have only one page. The content of the page will change based on the user's choices.
 The first version of the page will have 4 questions:
 - Name of the player
 - Topic
@@ -55,9 +55,9 @@ Once the user has filled in all these fields the game starts:
 
 ### Wireframes
 
-- [Welcome Page Wireframe](https://raw.githubusercontent.com/matteofiorini92/QuotesQuiz/master/assets/img/wireframes/initial-screen.png)
-- [QuotePage Wireframe](https://raw.githubusercontent.com/matteofiorini92/QuotesQuiz/master/assets/img/wireframes/game.png)
-- [Congratulation Page Wireframe](https://raw.githubusercontent.com/matteofiorini92/QuotesQuiz/master/assets/img/wireframes/scoreboard.png)
+- [Initial Page Wireframe](https://raw.githubusercontent.com/matteofiorini92/QuotesQuiz/master/assets/img/wireframes/initial-screen.png)
+- [Game Page Wireframe](https://raw.githubusercontent.com/matteofiorini92/QuotesQuiz/master/assets/img/wireframes/game.png)
+- [Scoreboard Page Wireframe](https://raw.githubusercontent.com/matteofiorini92/QuotesQuiz/master/assets/img/wireframes/scoreboard.png)
 
 ### The Surface Plane
 
@@ -95,16 +95,21 @@ The font will be Ubuntu.
 
 ## Testing
 
-Usability and responsiveness were tested on the followin browsers:
-xxx
+Usability and responsiveness were tested on the following browsers:
+- Google Chrome Version 90.0.4430.212 (Official Build) (x86_64)
+- Mozilla Firefox Version 72.0.2 (32-bit)
+- Safari Version 13.0.5 (15608.5.11)
 
 All sections and divs adapted to the screen size as expected, all links worked fine and the navigation was flawless.
+Some styling gets lots using Firefox (e.g. the "how to play" bar) but the rest of the website worked without any issues.
 
+ 
+- User story 1: I want to prove to myself how well I know a specific subject (movies, books, etc.).
+The player is able to challenge themselves on a number of topics, choosing the difficulty and length of the challenge.
+The final scoreboard is made with random scores, it doesn't give a realistic idea of what the player's score is - a more accurate scoreboard with real previous scores will be implemented in the future.
 
-[prove user stories were successfully satisfied]
-User story 1: 
-xxx
-
+- User story 2: I want to challenge my friends on who knows a particular topic the best
+The scoring system allows multiple players to play one after the other, and see who knows a particular topic best by comparing the final points. This needs to be done by the players as the system doesn't record the scoring of previous games.
 
 The Google Chrome Lighthouse reports for Desktop and Mobile:
 - ![Desktop](https://raw.githubusercontent.com/matteofiorini92/QuotesQuiz/master/assets/img/lighthouse/lighthouse-desktop.png)
@@ -141,14 +146,14 @@ I used the following validators to check my HTML and CSS code:
     - changed logic so that for each fake character the system adds either 5 or -2 randomly, for the number of rounds of the game
 - 2 extra characters for "hard" version weren't hidden at the end of the gaem
     - fixed this by adding the "hidden" class to the "hard" characters buttons
-- Name of wrong characters were just checked against the right answer. This could give duplicates as there could be two wrong characters with the same name
+- Names of the wrong characters were just checked against the right answer. This could give duplicates as there could be two wrong characters with the same name
     - changed logic used to retrieve the wrong characters fake names, so that each new name was compared with the right name and existing wrong answers
-- Deployed website wasn't workin because GitHub pages only works with relative paths, not with absoute paths
+- Deployed website wasn't workin because GitHub pages only works with relative paths, not with absolute paths
     - switch paths to relative
 - Click of Start Game button firing multiple times
     - fixed by adding e.stopImmediatePropagation() to the event listener as suggested in [this](https://stackoverflow.com/a/24564826) StackOverflow thread.
 - When trying to clean up the code and merge duplicated code into functions, the processing of two topics (friends and got) stopped working as the structure of the response was different:
-    - fixed by adapting the struction of allAuthors to an array of objects for these two topics as well, so that the same function could be use to process allAuthors for all topics.
+    - fixed by adapting the structure of allAuthors to an array of objects for these two topics as well, so that the same function could be used to process allAuthors for all topics.
 - The friends API is slow to respond the first time: a loading icon should be added while waiting for the response.
             
 
