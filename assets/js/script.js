@@ -226,6 +226,7 @@ function prepareForGame() {
         $('.characters').removeClass('hidden');
         $('.characters-hard').removeClass('hidden');
     }
+    $('#score').removeClass('negative-score').addClass('positive-score');
     $('.score-area').removeClass('hidden');
     $('.progression-area').removeClass('hidden');
     document.getElementById('number-of-quotes').innerText = numberOfQuotes;

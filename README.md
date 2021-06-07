@@ -55,9 +55,9 @@ Once the user has filled in all these fields the game starts:
 
 ### Wireframes
 
-- [Welcome Page Wireframe](xxx)
-- [QuotePage Wireframe](xxx)
-- [Congratulation Page Wireframe](xxx)
+- [Welcome Page Wireframe](https://raw.githubusercontent.com/matteofiorini92/QuotesQuiz/master/assets/img/wireframes/initial-screen.png)
+- [QuotePage Wireframe](https://raw.githubusercontent.com/matteofiorini92/QuotesQuiz/master/assets/img/wireframes/game.png)
+- [Congratulation Page Wireframe](https://raw.githubusercontent.com/matteofiorini92/QuotesQuiz/master/assets/img/wireframes/scoreboard.png)
 
 ### The Surface Plane
 
@@ -83,10 +83,7 @@ The font will be Ubuntu.
 
 - [Balsamiq](https://balsamiq.com/) for the wireframes of this readme.md file
 - [Bootstrap](https://getbootstrap.com/) to use the grid system, pre-formatted buttons and the scoreboard table
-<!-- - [Animate.css](https://animate.style/) for xxx -->
-<!-- - [FontAwesome](https://fontawesome.com/) for icons -->
 - [Google Fonts](https://fonts.google.com/) for fonts
-<!-- - [Hover.css](http://ianlunn.github.io/Hover/) for xxx -->
 - [JQuery](https://code.jquery.com/)
 - [FreeLogoDesign](https://www.freelogodesign.org/) to design the logo
 - [Canva](https://www.canva.com/) to create the background image
@@ -150,6 +147,8 @@ I used the following validators to check my HTML and CSS code:
     - switch paths to relative
 - Click of Start Game button firing multiple times
     - fixed by adding e.stopImmediatePropagation() to the event listener as suggested in [this](https://stackoverflow.com/a/24564826) StackOverflow thread.
+- When trying to clean up the code and merge duplicated code into functions, the processing of two topics (friends and got) stopped working as the structure of the response was different:
+    - fixed by adapting the struction of allAuthors to an array of objects for these two topics as well, so that the same function could be use to process allAuthors for all topics.
 - The friends API is slow to respond the first time: a loading icon should be added while waiting for the response.
             
 
