@@ -292,7 +292,7 @@ function getQuote() {
                     rightAuthorName = quote.character;
                     getCharacters(rightAuthorName);
                 }
-            }
+            };
             quoteRequest.send();
             break;
         case 'friends':
@@ -306,7 +306,7 @@ function getQuote() {
                     rightAuthorName = quote.character;
                     getCharacters(rightAuthorName);
                 }
-            }
+            };
             quoteRequest.send();
             break;
         default:

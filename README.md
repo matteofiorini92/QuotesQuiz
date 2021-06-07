@@ -116,7 +116,7 @@ The Google Chrome Lighthouse reports for Desktop and Mobile:
 - ![Mobile](https://raw.githubusercontent.com/matteofiorini92/QuotesQuiz/master/assets/img/lighthouse/lighthouse-mobile.png)
 
 
-I used the following validators to check my HTML and CSS code:
+I used the following validators to check my HTML, CSS and JavaScript code:
 
 [HTML Validator](https://validator.w3.org/)
 - [Home Page](https://validator.w3.org/nu/?doc=https%3A%2F%2Fmatteofiorini92.github.io%2FQuotesQuiz%2F)
@@ -131,7 +131,8 @@ I used the following validators to check my HTML and CSS code:
             alt="Valid CSS!" />
     </a>
 </p>
-      
+
+[JS Validator](https://jshint.com/)
 
 ### Bugs
 
